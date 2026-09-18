@@ -30,26 +30,22 @@ html, body { margin: 0; padding: 0; }
   --radius-in:  48px;      /* 화면 모서리 */
   --radius-out: 60px;      /* 테두리 모서리 */
 
-  /* 화면이 좁으면(모바일) 프레임째로 축소, 넓으면(PC) 아래 media query가 고정값으로 덮어씀 */
-  --s: min(1, calc((100vw - 24px) / 414), calc((100vh - 24px) / 868));
+  /* 화면 크기에 맞는 배율. 실제 값은 JS(setScale)가 계산해서 넣어줍니다. */
+  --s: 1;
 
   /* 좌우 여백 */
   --pad: 20px;
-}
-
-/* PC처럼 화면이 넓을 때는 스크린샷과 같은 고정 크기로 표시 */
-@media (min-width: 640px){
-  :root{ --s: 0.82; }
 }
 
 body{
   background: #ffffff;
   min-height: 100vh;
   min-height: 100dvh;
+  margin: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;   /* 세로는 중앙정렬 대신 위에서부터, 넘치면 자연스럽게 스크롤 */
   justify-content: center;
-  padding: 12px;
+  padding: 24px 12px;
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
                "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -548,6 +544,24 @@ body{
   </div>
 </div>
 </div>
+
+<script>
+  // 화면 크기에 맞는 배율(--s)을 계산해서 적용합니다.
+  // (scale() 안에 min()/calc()를 직접 넣으면 일부 브라우저에서 무시되는 문제가 있어 JS로 계산합니다.)
+  function setScale(){
+    var w = window.innerWidth;
+    var s;
+    if (w >= 640){
+      s = 0.82;                         // PC: 고정 크기
+    } else {
+      s = Math.min(1, (w - 24) / 414);  // 모바일: 화면 폭에 맞춰 축소
+    }
+    document.documentElement.style.setProperty('--s', s);
+  }
+  setScale();
+  window.addEventListener('resize', setScale);
+  window.addEventListener('orientationchange', setScale);
+</script>
 
 <script>
   var tabs = document.querySelectorAll('.tab');
