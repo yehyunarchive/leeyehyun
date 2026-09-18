@@ -3,546 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sincerely...</title>
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<title>영원 외 호칭 X</title>
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <style>
-/* ============================================================
-   1. 기본 설정
-   ============================================================ */
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+  :root{
+    --text-main:#191919;
+    --text-sub:#9a9a9a;
+    --border:#e7e7e7;
+    --bg:#ffffff;
+  }
+  *{ box-sizing:border-box; }
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg);
+    color:var(--text-main);
+    font-family:'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{
+    max-width:480px;
+    margin:0 auto;
+    padding:56px 28px 80px;
+  }
 
-:root{
-  /* 색상 */
-  --ink:        #111111;   /* 본문 / 제목 */
-  --ink-soft:   #555555;   /* 부제목 */
-  --ink-mute:   #8e8e93;   /* 날짜, 라벨 */
-  --line:       #e5e5e5;   /* 구분선 */
-  --bg:         #ffffff;   /* 폰 화면 배경 */
-  --page-bg:    #f7f7f7;   /* 바깥 배경 */
-  --dot:        #dcdcdc;   /* 바깥 배경 점 */
-  --bezel:      #0d0d0d;   /* 폰 테두리 */
+  /* 탭 */
+  .tabs{
+    display:flex;
+    gap:18px;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:-0.02em;
+    color:var(--text-sub);
+    cursor:default;
+    user-select:none;
+  }
+  .tabs .tab{
+    cursor:pointer;
+    color:var(--text-sub);
+    transition:color .15s ease;
+  }
+  .tabs .tab:hover{
+    color:var(--text-main);
+  }
+  .tabs .tab.active{
+    color:var(--text-main);
+  }
+  .tabs .tab .num{
+    font-weight:700;
+  }
 
-  /* 폰 크기 */
-  --phone-w:    390px;     /* 화면 너비 */
-  --phone-h:    744px;     /* 화면 높이 */
-  --bezel-w:    12px;      /* 테두리 두께 */
-  --radius-in:  48px;      /* 화면 모서리 */
-  --radius-out: 60px;      /* 테두리 모서리 */
+  /* 탭과 본문 사이 여백 */
+  .content{
+    margin-top:44px;
+  }
 
-  /* 화면 크기에 맞는 배율. 실제 값은 JS(setScale)가 계산해서 넣어줍니다. */
-  --s: 1;
+  .title{
+    font-size:19px;
+    font-weight:700;
+    letter-spacing:-0.03em;
+    line-height:1.4;
+    margin:0 0 14px;
+  }
 
-  /* 좌우 여백 */
-  --pad: 20px;
-}
+  .subtitle{
+    font-size:14px;
+    font-weight:500;
+    letter-spacing:-0.02em;
+    line-height:1.6;
+    margin:0 0 20px;
+    color:var(--text-sub);
+  }
+  .subtitle .strong{
+    color:var(--text-main);
+    font-weight:700;
+  }
 
-body{
-  background: #ffffff;
-  min-height: 100vh;
-  min-height: 100dvh;
-  margin: 0;
-  display: flex;
-  align-items: flex-start;   /* 세로는 중앙정렬 대신 위에서부터, 넘치면 자연스럽게 스크롤 */
-  justify-content: center;
-  padding: 24px 12px;
-  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
-               "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+  .body-text{
+    font-size:14.5px;
+    font-weight:400;
+    letter-spacing:-0.02em;
+    line-height:1.75;
+    color:var(--text-main);
+    white-space:pre-line;
+  }
 
-/* 축소된 프레임이 차지할 자리 */
-.stage{
-  width: calc(414px * var(--s));
-  height: calc(868px * var(--s));
-  flex: none;
-}
+  .signature{
+    margin-top:36px;
+    font-size:14.5px;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    color:var(--text-main);
+  }
 
-/* ============================================================
-   2. 폰 테두리
-   ============================================================ */
-.phone{
-  width: 414px;
-  background: var(--bezel);
-  border-radius: var(--radius-out);
-  padding: var(--bezel-w);
-  box-shadow: 0 18px 44px rgba(0,0,0,.18);
-  transform: scale(var(--s));
-  transform-origin: top left;
-}
-.screen{
-  position: relative;
-  width: var(--phone-w);
-  height: var(--phone-h);
-  background: var(--bg);
-  border-radius: var(--radius-in);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
+  .placeholder{
+    font-size:13.5px;
+    letter-spacing:-0.02em;
+    line-height:1.75;
+    color:var(--text-sub);
+  }
 
-/* ---- 상태바 + 다이나믹 아일랜드 ---- */
-.statusbar{
-  flex: none;
-  height: 54px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 28px 0 32px;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: .2px;
-}
-.status-right{ display: flex; align-items: center; gap: 6px; }
-.island{
-  position: absolute;
-  top: 12px; left: 50%;
-  transform: translateX(-50%);
-  width: 163px;      /* 아일랜드 너비 */
-  height: 33px;
-  padding: 0 13px;
-  background: #000;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  z-index: 5;
-}
-.island .chip{
-  flex: none;
-  width: 21px; height: 21px;
-  background: #fff;
-  border-radius: 5px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; color: #000;
-}
-/* 음파(이퀄라이저) : 가운데 정렬된 둥근 막대 */
-.island .wave{ display: flex; align-items: center; gap: 2.5px; height: 14px; }
-.island .wave i{ width: 2.5px; background: #fff; border-radius: 2px; display: block; }
-.island .wave i:nth-child(1){ height: 4px; }
-.island .wave i:nth-child(2){ height: 14px; }
-.island .wave i:nth-child(3){ height: 9px; }
-.island .wave i:nth-child(4){ height: 4px; }
-.island .wave i:nth-child(5){ height: 14px; }
-.island .wave i:nth-child(6){ height: 9px; }
-.island .note{ display: none; }
-.battery{
-  width: 25px; height: 13px;
-  border: 1.5px solid var(--ink);
-  border-radius: 4px;
-  position: relative;
-  display: flex; align-items: center;
-  padding: 1.5px;
-}
-.battery::after{
-  content: "";
-  position: absolute; right: -4px; top: 50%;
-  transform: translateY(-50%);
-  width: 2px; height: 5px;
-  background: var(--ink);
-  border-radius: 0 2px 2px 0;
-}
-.battery i{ display: block; height: 100%; width: 25%; background: var(--ink); border-radius: 2px; }
-
-/* ============================================================
-   3. 헤더 / 탭
-   ============================================================ */
-.masthead{
-  flex: none;
-  padding: 8px var(--pad) 0;
-  display: flex;
-  align-items: center;
-  gap: 14px;          /* 햄버거와 로고 사이 간격 */
-  background: var(--bg);
-}
-.icons{ margin-left: auto; }   /* 아이콘만 오른쪽 끝으로 */
-.logo{
-  font-size: 18px;
-  letter-spacing: -.6px;
-  color: var(--ink);
-}
-.logo b{ font-weight: 800; }
-.logo span{ font-weight: 400; }
-.icons{ display: flex; align-items: center; gap: 14px; }
-.icon-btn{
-  background: none; border: 0; padding: 0; cursor: pointer;
-  color: var(--ink); line-height: 0;
-}
-.burger{ display: flex; flex-direction: column; gap: 4px; }
-.burger i{ display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
-
-.tabs{
-  flex: none;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  padding: 12px var(--pad) 13px;
-  border-bottom: 1px solid var(--line);
-  background: var(--bg);
-}
-.tab{
-  background: none; border: 0; padding: 0;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: -.6px;
-  color: var(--ink);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  opacity: .45;
-  transition: opacity .15s ease;
-}
-.tab .star{ font-size: 13px; }
-.tab.is-active{ opacity: 1; }
-.tab:focus-visible{ outline: 2px solid #000; outline-offset: 3px; border-radius: 3px; }
-
-/* ============================================================
-   4. 본문
-   ============================================================ */
-.viewport{
-  flex: 1 1 auto;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 96px;   /* 하단 사파리 바 높이만큼 */
-}
-.viewport::-webkit-scrollbar{ display: none; }
-.panel{ display: none; }
-.panel.is-active{ display: block; }
-
-.article-head{ padding: 22px var(--pad) 20px; }
-.kicker{
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: -.2px;
-  color: var(--ink-mute);
-  margin: 0 0 11px;
-}
-
-/* ---- 검은 배경 글자 (뱃지 / 인라인 하이라이트) ----
-   원하는 글자를 감싸서 꾸밀 때 사용하세요.
-   예) <span class="badge-black">INTERVIEW</span>
-       본문 중간에는 <span class="hl-black">강조할 단어</span> */
-.badge-black{
-  display: inline-block;
-  background: var(--ink);
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: -.1px;
-  padding: 3px 8px;
-  border-radius: 3px;
-}
-.hl-black{
-  background: var(--ink);
-  color: #fff;
-  padding: 0 4px;
-  border-radius: 2px;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-.headline{
-  font-size: 19px;
-  font-weight: 800;
-  line-height: 1.28;
-  letter-spacing: -.9px;
-  color: var(--ink);
-  margin: 0 0 5px;
-}
-.standfirst{
-  font-size: 12px;
-  line-height: 1.4;
-  letter-spacing: -.6px;
-  color: var(--ink-soft);
-  margin: 0 0 18px;
-}
-.date{
-  font-size: 11.5px;
-  letter-spacing: -.4px;
-  color: var(--ink-mute);
-  margin: 0;
-}
-
-/* 이미지 자리 (사진은 직접 넣으세요) */
-.hero{
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background: repeating-linear-gradient(45deg, #ededed 0 12px, #e4e4e4 12px 24px);
-  display: flex; align-items: center; justify-content: center;
-  color: #9a9a9a; font-size: 13px; letter-spacing: -.2px;
-  overflow: hidden;
-}
-.hero img{ width: 100%; height: 100%; object-fit: cover; display: block; }
-
-.article-body{
-  padding: 18px var(--pad) 32px;
-  font-size: 12px;
-  line-height: 1.5;
-  letter-spacing: -.6px;
-  color: var(--ink);
-}
-.article-body p{ margin: 0 0 11px; }
-.article-body p:last-child{ margin-bottom: 0; }
-.lede{ font-weight: 700; }
-.handle{ color: #9b9b9b; }
-.speaker{ font-weight: 700; }
-.q{ font-weight: 700; margin-bottom: 8px; }
-
-/* ============================================================
-   5. 카드 목록 (지구행 승선자)
-   ============================================================ */
-.cards{ padding: 22px var(--pad) 40px; display: flex; flex-direction: column; gap: 14px; }
-.card{
-  position: relative;
-  display: block;
-  height: 112px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #cfcfcf;
-  text-decoration: none;
-  isolation: isolate;
-}
-.card img{
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.card::after{
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.45) 100%);
-}
-.card-text{
-  position: absolute;
-  left: 18px; bottom: 14px;
-  z-index: 2;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
-}
-.card-title{ font-size: 13.5px; font-weight: 800; letter-spacing: -.7px; margin: 0 0 2px; }
-.card-sub{ font-size: 10px; font-weight: 500; letter-spacing: -.5px; opacity: .9; margin: 0; }
-
-/* ============================================================
-   6. 하단 사파리 바
-   ============================================================ */
-.safari{
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: 10px 12px 10px;
-  background: rgba(255,255,255,.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-top: 1px solid rgba(0,0,0,.05);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  z-index: 10;
-}
-.round{
-  flex: none;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: #f1f1f3;
-  border: 0;
-  display: flex; align-items: center; justify-content: center;
-  color: #1c1c1e;
-  cursor: pointer;
-}
-.urlbar{
-  flex: 1 1 auto;
-  height: 40px;
-  border-radius: 20px;
-  background: #f1f1f3;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 14px;
-  font-size: 13px;
-  letter-spacing: -.4px;
-  color: #1c1c1e;
-}
-.urlbar .url{ flex: 1 1 auto; text-align: center; }
-.home-indicator{
-  position: absolute;
-  bottom: 8px; left: 50%;
-  transform: translateX(-50%);
-  width: 134px; height: 5px;
-  background: #000;
-  border-radius: 3px;
-  z-index: 11;
-}
-
-/* ============================================================
-   7. 참고: 화면이 좁아지면 :root의 --s 값이 프레임 전체를
-   비율 그대로 줄여 주므로 별도의 모바일 분기는 없습니다.
-   ============================================================ */
+  [data-panel]{ display:none; }
+  [data-panel].active{ display:block; }
 </style>
 </head>
 <body>
 
-<div class="stage">
-<div class="phone">
-  <div class="screen">
+  <div class="page">
 
-    <!-- 다이나믹 아일랜드 -->
-    <div class="island">
-      <span class="chip">★</span>
-      <span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-    </div>
-
-    <!-- 상태바 -->
-    <div class="statusbar">
-      <span>12:25</span>
-      <span class="status-right">
-        <svg width="17" height="13" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true">
-          <path d="M8 9.6a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4zm0-3.4c1.1 0 2.1.4 2.9 1.1l-1 1.1A2.8 2.8 0 008 7.6c-.7 0-1.4.3-1.9.8l-1-1.1A4.3 4.3 0 018 6.2zm0-3.2c2 0 3.8.8 5.1 2l-1 1.1A5.9 5.9 0 008 4.6c-1.6 0-3 .6-4.1 1.5l-1-1.1A7.4 7.4 0 018 3zm0-3c2.9 0 5.5 1.1 7.4 3l-1 1.1A9 9 0 008 1.5 9 9 0 001.6 4.1l-1-1.1A10.4 10.4 0 018 0z"/>
-        </svg>
-        <span class="battery"><i></i></span>
-      </span>
-    </div>
-
-    <!-- 로고 -->
-    <header class="masthead">
-      <button class="icon-btn burger" type="button" aria-label="메뉴">
-        <i></i><i></i><i></i>
-      </button>
-      <div class="logo"><b>Sincerely</b><span>...</span></div>
-      <div class="icons">
-        <button class="icon-btn" type="button" aria-label="검색">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>
-          </svg>
-        </button>
-        <button class="icon-btn" type="button" aria-label="언어">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>
-          </svg>
-        </button>
-      </div>
-    </header>
-
-    <!-- 탭 -->
     <nav class="tabs">
-      <button class="tab is-active" type="button" data-tab="recode"><span class="star">(1)</span>理想</button>
-      <button class="tab" type="button" data-tab="jaeh"><span class="star">(2)</span>lyh.com</button>
-      <button class="tab" type="button" data-tab="earth"><span class="star">(3)</span>그럼에도 불구하고</button>
+      <span class="tab active" data-target="1"><span class="num">(1)</span> 理想</span>
+      <span class="tab" data-target="2"><span class="num">(2)</span> lyh.com</span>
+      <span class="tab" data-target="3"><span class="num">(3)</span> 그럼에도 불구하고</span>
     </nav>
 
-    <!-- 본문 -->
-    <main class="viewport" id="viewport">
+    <div class="content">
 
-      <!-- 1. 理想 -->
-      <section class="panel is-active" id="panel-recode">
-        <div class="article-head">
-          <p class="kicker">ACCOUNT...</p>
-          <h1 class="headline">@unlessfearwell</h1>
-          <p class="standfirst">비주기성 프로텍트 계정</p>
-          <p class="date">2026.01.25</p>
-        </div>
-
-        <div class="hero">
-         <img src="https://i.pinimg.com/1200x/0f/db/e2/0fdbe2c50ece1d5906b3d4c9e3040c99.jpg" alt="">
-          
-        </div>
-
-        <div class="article-body">
-          <p class="lede">영원 외 호칭 X</p>
-          <p>블랙배저 이예현 <span class="handle">외 동일 장르 최 윤 (sub)</span></p>
-          <p>only NL 소비 성향으로 상단 캐릭터가 관련된 동인이 아니더라도 공식이 아닌 이상 유입 거부합니다 모든 작품의 스포일러 별도로 필터링 하지 않으므로 유의 바랍니다 또한 편하게 쓰는 계정인 만큼 타 계정과 달리 상당히 예민하고 언행이 거친 편입니다 불편할 시 팔로우 재고 편하게 해 주세요</p>
-        </div>
+      <section data-panel="1" class="active">
+        <p class="title">영원 외 호칭 X</p>
+        <p class="subtitle">블랙배저 <span class="strong">이예현</span> 외 동일 장르 최윤 (sub)</p>
+        <p class="body-text">only NL 소비 성향으로 상단 캐릭터가 관련된 동인이 아니더라도 공식이 아닌 이상 유입 거부합니다. 모든 작품의 스포일러 별도로 필터링 하지 않으므로 유의 바랍니다. 또한 편하게 쓰는 계정인 만큼 타 계정과 달리 상당히 예민하고 언행이 거친 편입니다. 불편할 시 팔로우 재고 편하게 해 주세요.</p>
+        <p class="signature">나나냥!!</p>
       </section>
 
-      <!-- 2. lyh.com -->
-      <section class="panel" id="panel-jaeh">
-        <div class="article-head">
-          <p class="kicker">MORE...</p>
-          <h1 class="headline">( Broken wings )</h1>
-          <p class="standfirst">하단 기재 사항은 가볍게 훑어주셔도 됩니다!</p>
-          <p class="date">2026.12.26</p>
-        </div>
-
-        <div class="hero">
-          <img src="https://i.pinimg.com/1200x/2d/9a/1d/2d9a1dfecefddb4c2a66f6f0b1a40ace.jpg"">
-          
-        </div>
-
-        <div class="article-body">
-          <p class="q">타 계정과 달리 개인정보 쉽게 언급합니다 퍼날하지 마세요</p> 특히 언급하는 요소 중 대다수를 차지하는 대학 및 재학 중인 학과에 대해서는 별도의 인증을 마친 상태며 재차 언급하지 않아요 믿으시는 건 자유일 뿐더러 해당 사유로 피곤한 일 지속되는 것 원치 않습니다</p>
-          <p class="q">이예현 관련 모든 발언에 면역이 없습니다</p>
-          <p>애정 발언은 차치하고 캐릭터를 향하는 모든 부정적인 발화 못 보며 유입 시 친분 무관 블락합니다 추가로 캐혐까지는 아니나 이승현의 학대 및 방임과 관련된 과거 행동을 옹호 내지 정당화하는 것 절대 보고 싶지 않습니다...... 무슨 일이 있어도 관련 내용은 유입하거나 언급하지 마세요</p>
-        </div>
+      <section data-panel="2">
+        <p class="title">lyh.com</p>
+        <p class="placeholder">이 페이지의 내용을 채워 주세요.</p>
       </section>
 
-      <!-- 3. 지구행 승선자 -->
-      <div class="article-body">
-          <p class="q">냐냐냥!!</p>
-          
-        </div>
+      <section data-panel="3">
+        <p class="title">그럼에도 불구하고</p>
+        <p class="placeholder">이 페이지의 내용을 채워 주세요.</p>
       </section>
 
-    </main>
-
-    <!-- 하단 사파리 바 -->
-    <div class="safari">
-      <button class="round" type="button" aria-label="뒤로">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 5l-7 7 7 7"/>
-        </svg>
-      </button>
-      <div class="urlbar">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h7"/>
-        </svg>
-        <span class="url">eternityarchive.com</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="M20 11a8 8 0 10-2.3 5.7"/><path d="M20 5v6h-6"/>
-        </svg>
-      </div>
-      <button class="round" type="button" aria-label="더보기">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-          <circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/>
-        </svg>
-      </button>
     </div>
-    <div class="home-indicator"></div>
-
   </div>
-</div>
-</div>
 
 <script>
-  // 화면 크기에 맞는 배율(--s)을 계산해서 적용합니다.
-  // (scale() 안에 min()/calc()를 직접 넣으면 일부 브라우저에서 무시되는 문제가 있어 JS로 계산합니다.)
-  function setScale(){
-    var w = window.innerWidth;
-    var s;
-    if (w >= 640){
-      s = 0.82;                         // PC: 고정 크기
-    } else {
-      s = Math.min(1, (w - 24) / 414);  // 모바일: 화면 폭에 맞춰 축소
-    }
-    document.documentElement.style.setProperty('--s', s);
-  }
-  setScale();
-  window.addEventListener('resize', setScale);
-  window.addEventListener('orientationchange', setScale);
-</script>
-
-<script>
-  var tabs = document.querySelectorAll('.tab');
-  var panels = document.querySelectorAll('.panel');
-  var viewport = document.getElementById('viewport');
-
-  tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      tabs.forEach(function (t) { t.classList.remove('is-active'); });
-      panels.forEach(function (p) { p.classList.remove('is-active'); });
-      tab.classList.add('is-active');
-      document.getElementById('panel-' + tab.dataset.tab).classList.add('is-active');
-      viewport.scrollTop = 0;
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('[data-panel]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-target');
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector('[data-panel="' + target + '"]').classList.add('active');
     });
   });
 </script>
