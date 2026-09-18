@@ -7,7 +7,18 @@
 <link rel="stylesheet" as="style" crossorigin
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <style>
+  /*
+    ====== 비례 스케일 설정 ======
+    --base 하나만 바꾸면 글자 크기 · 자간 · 행간 · 여백이 전부 같은 비율로
+    따라서 조정됩니다. (자간·행간은 em/배수 단위라 각 요소의 font-size에
+    비례해서 자동으로 커지고 작아짐)
+
+    예) --base: 11px  →  --base: 14px 로만 바꿔도 전체가 커집니다.
+  */
   :root{
+    --base: 11px;          /* 본문 글자 크기 = 기준값 */
+    --tracking: -0.045em;  /* 자간 (모든 요소 공통, em 단위라 비례 유지) */
+
     --text-main:#191919;
     --text-sub:#9a9a9a;
     --border:#e7e7e7;
@@ -17,24 +28,32 @@
   html,body{
     margin:0;
     padding:0;
+    min-height:100%;
     background:var(--bg);
     color:var(--text-main);
     font-family:'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing:antialiased;
   }
+  body{
+    display:flex;
+    align-items:center;      /* 세로 중앙 */
+    justify-content:center;  /* 가로 중앙 */
+    min-height:100vh;
+  }
   .page{
+    width:100%;
     max-width:340px;
-    margin:0 auto;
-    padding:40px 20px 60px;
+    padding:2.5em 1.4em;   /* .page 자체 font-size(=--base) 기준 비례 여백 */
+    font-size:var(--base); /* 이 아래 모든 em 값의 기준점 */
   }
 
   /* 탭 */
   .tabs{
     display:flex;
-    gap:12px;
-    font-size:11px;
+    gap:1.1em;
+    font-size:1em;
     font-weight:600;
-    letter-spacing:-0.04em;
+    letter-spacing:var(--tracking);
     color:var(--text-sub);
     cursor:default;
     user-select:none;
@@ -54,25 +73,25 @@
     font-weight:700;
   }
 
-  /* 탭과 본문 사이 여백 */
+  /* 탭과 본문 사이 여백 (base 대비 비례) */
   .content{
-    margin-top:33px;
+    margin-top:3em;
   }
 
   .title{
-    font-size:15px;
+    font-size:1.36em;      /* base 대비 배수라 --base 변경 시 함께 커짐 */
     font-weight:700;
-    letter-spacing:-0.04em;
+    letter-spacing:var(--tracking);
     line-height:1.35;
-    margin:0 0 10px;
+    margin:0 0 0.9em;
   }
 
   .subtitle{
-    font-size:11px;
+    font-size:1em;
     font-weight:500;
-    letter-spacing:-0.04em;
+    letter-spacing:var(--tracking);
     line-height:1.45;
-    margin:0 0 15px;
+    margin:0 0 1.4em;
     color:var(--text-sub);
   }
   .subtitle .strong{
@@ -81,25 +100,25 @@
   }
 
   .body-text{
-    font-size:11px;
+    font-size:1em;
     font-weight:400;
-    letter-spacing:-0.04em;
+    letter-spacing:var(--tracking);
     line-height:1.5;
     color:var(--text-main);
     white-space:pre-line;
   }
 
   .signature{
-    margin-top:24px;
-    font-size:11px;
+    margin-top:2.2em;
+    font-size:1em;
     font-weight:700;
-    letter-spacing:-0.04em;
+    letter-spacing:var(--tracking);
     color:var(--text-main);
   }
 
   .placeholder{
-    font-size:10px;
-    letter-spacing:-0.04em;
+    font-size:0.9em;
+    letter-spacing:var(--tracking);
     line-height:1.5;
     color:var(--text-sub);
   }
@@ -109,7 +128,7 @@
 
   @media (max-width: 360px){
     .page{
-      padding:32px 16px 48px;
+      padding:2.2em 1.1em;
     }
   }
 </style>
