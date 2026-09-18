@@ -30,11 +30,16 @@ html, body { margin: 0; padding: 0; }
   --radius-in:  48px;      /* 화면 모서리 */
   --radius-out: 60px;      /* 테두리 모서리 */
 
-  /* 화면이 좁으면 프레임째로 축소 (모바일 대응) */
+  /* 화면이 좁으면(모바일) 프레임째로 축소, 넓으면(PC) 아래 media query가 고정값으로 덮어씀 */
   --s: min(1, calc((100vw - 24px) / 414), calc((100vh - 24px) / 868));
 
   /* 좌우 여백 */
   --pad: 20px;
+}
+
+/* PC처럼 화면이 넓을 때는 스크린샷과 같은 고정 크기로 표시 */
+@media (min-width: 640px){
+  :root{ --s: 0.82; }
 }
 
 body{
@@ -219,6 +224,30 @@ body{
   color: var(--ink-mute);
   margin: 0 0 11px;
 }
+
+/* ---- 검은 배경 글자 (뱃지 / 인라인 하이라이트) ----
+   원하는 글자를 감싸서 꾸밀 때 사용하세요.
+   예) <span class="badge-black">INTERVIEW</span>
+       본문 중간에는 <span class="hl-black">강조할 단어</span> */
+.badge-black{
+  display: inline-block;
+  background: var(--ink);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: -.1px;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+.hl-black{
+  background: var(--ink);
+  color: #fff;
+  padding: 0 4px;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 .headline{
   font-size: 19px;
   font-weight: 800;
