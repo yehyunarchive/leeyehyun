@@ -1,101 +1,542 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Card</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        body {
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        .card {
-            background: #ffffff;
-            width: 100%;
-            max-width: 400px;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-        .profile-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #333333;
-            margin-bottom: 8px;
-        }
-        .bio {
-            font-size: 14px;
-            color: #666666;
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-        .section-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #444444;
-            margin: 20px 0 10px;
-            text-align: left;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 5px;
-        }
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .tag {
-            background: #f7f7f7;
-            color: #555555;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-size: 12px;
-            border: 1px solid #eeeeee;
-        }
-        .link-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            background: #222222;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: opacity 0.2s;
-        }
-        .link-btn:hover {
-            opacity: 0.85;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sincerely for...</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* ============================================================
+   1. 기본 설정
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+:root{
+  /* 색상 */
+  --ink:        #111111;   /* 본문 / 제목 */
+  --ink-soft:   #555555;   /* 부제목 */
+  --ink-mute:   #8e8e93;   /* 날짜, 라벨 */
+  --line:       #e5e5e5;   /* 구분선 */
+  --bg:         #ffffff;   /* 폰 화면 배경 */
+  --page-bg:    #f7f7f7;   /* 바깥 배경 */
+  --dot:        #dcdcdc;   /* 바깥 배경 점 */
+  --bezel:      #0d0d0d;   /* 폰 테두리 */
+
+  /* 폰 크기 */
+  --phone-w:    390px;     /* 화면 너비 */
+  --phone-h:    844px;     /* 화면 높이 */
+  --bezel-w:    12px;      /* 테두리 두께 */
+  --radius-in:  48px;      /* 화면 모서리 */
+  --radius-out: 60px;      /* 테두리 모서리 */
+
+  /* 좌우 여백 */
+  --pad: 22px;
+}
+
+body{
+  background-color: var(--page-bg);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 22px 22px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+               "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   2. 폰 테두리
+   ============================================================ */
+.phone{
+  width: calc(var(--phone-w) + var(--bezel-w) * 2);
+  background: var(--bezel);
+  border-radius: var(--radius-out);
+  padding: var(--bezel-w);
+  box-shadow: 0 24px 60px rgba(0,0,0,.22);
+  flex: none;
+}
+.screen{
+  position: relative;
+  width: var(--phone-w);
+  height: var(--phone-h);
+  background: var(--bg);
+  border-radius: var(--radius-in);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- 상태바 + 다이나믹 아일랜드 ---- */
+.statusbar{
+  flex: none;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px 0 32px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: .2px;
+}
+.status-right{ display: flex; align-items: center; gap: 6px; }
+.island{
+  position: absolute;
+  top: 12px; left: 50%;
+  transform: translateX(-50%);
+  width: 163px;      /* 아일랜드 너비 */
+  height: 33px;
+  padding: 0 13px;
+  background: #000;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 5;
+}
+.island .chip{
+  flex: none;
+  width: 21px; height: 21px;
+  background: #fff;
+  border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: #000;
+}
+/* 음파(이퀄라이저) : 가운데 정렬된 둥근 막대 */
+.island .wave{ display: flex; align-items: center; gap: 2.5px; height: 14px; }
+.island .wave i{ width: 2.5px; background: #fff; border-radius: 2px; display: block; }
+.island .wave i:nth-child(1){ height: 4px; }
+.island .wave i:nth-child(2){ height: 14px; }
+.island .wave i:nth-child(3){ height: 9px; }
+.island .wave i:nth-child(4){ height: 4px; }
+.island .wave i:nth-child(5){ height: 14px; }
+.island .wave i:nth-child(6){ height: 9px; }
+.island .note{ color: #fff; font-size: 14px; line-height: 1; }
+.battery{
+  width: 25px; height: 13px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  position: relative;
+  display: flex; align-items: center;
+  padding: 1.5px;
+}
+.battery::after{
+  content: "";
+  position: absolute; right: -4px; top: 50%;
+  transform: translateY(-50%);
+  width: 2px; height: 5px;
+  background: var(--ink);
+  border-radius: 0 2px 2px 0;
+}
+.battery i{ display: block; height: 100%; width: 25%; background: var(--ink); border-radius: 2px; }
+
+/* ============================================================
+   3. 헤더 / 탭
+   ============================================================ */
+.masthead{
+  flex: none;
+  padding: 8px var(--pad) 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;          /* 햄버거와 로고 사이 간격 */
+  background: var(--bg);
+}
+.icons{ margin-left: auto; }   /* 아이콘만 오른쪽 끝으로 */
+.logo{
+  font-size: 21px;
+  letter-spacing: -.4px;
+  color: var(--ink);
+}
+.logo b{ font-weight: 800; }
+.logo span{ font-weight: 400; }
+.icons{ display: flex; align-items: center; gap: 14px; }
+.icon-btn{
+  background: none; border: 0; padding: 0; cursor: pointer;
+  color: var(--ink); line-height: 0;
+}
+.burger{ display: flex; flex-direction: column; gap: 4px; }
+.burger i{ display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+.tabs{
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px var(--pad) 13px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+}
+.tab{
+  background: none; border: 0; padding: 0;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  opacity: .45;
+  transition: opacity .15s ease;
+}
+.tab .star{ font-size: 13px; }
+.tab.is-active{ opacity: 1; }
+.tab:focus-visible{ outline: 2px solid #000; outline-offset: 3px; border-radius: 3px; }
+
+/* ============================================================
+   4. 본문
+   ============================================================ */
+.viewport{
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 96px;   /* 하단 사파리 바 높이만큼 */
+}
+.viewport::-webkit-scrollbar{ display: none; }
+.panel{ display: none; }
+.panel.is-active{ display: block; }
+
+.article-head{ padding: 26px var(--pad) 24px; }
+.kicker{
+  font-size: 12px;
+  letter-spacing: 1.6px;
+  color: var(--ink-mute);
+  margin: 0 0 14px;
+}
+.headline{
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.34;
+  letter-spacing: -.7px;
+  color: var(--ink);
+  margin: 0 0 7px;
+}
+.standfirst{
+  font-size: 13.5px;
+  line-height: 1.5;
+  letter-spacing: -.3px;
+  color: var(--ink-soft);
+  margin: 0 0 22px;
+}
+.date{
+  font-size: 13px;
+  letter-spacing: -.2px;
+  color: var(--ink-mute);
+  margin: 0;
+}
+
+/* 이미지 자리 (사진은 직접 넣으세요) */
+.hero{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: repeating-linear-gradient(45deg, #ededed 0 12px, #e4e4e4 12px 24px);
+  display: flex; align-items: center; justify-content: center;
+  color: #9a9a9a; font-size: 13px; letter-spacing: -.2px;
+  overflow: hidden;
+}
+.hero img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.article-body{
+  padding: 24px var(--pad) 40px;
+  font-size: 14px;
+  line-height: 1.75;
+  letter-spacing: -.35px;
+  color: var(--ink);
+}
+.article-body p{ margin: 0 0 15px; }
+.article-body p:last-child{ margin-bottom: 0; }
+.lede{ font-weight: 700; }
+.handle{ color: #9b9b9b; }
+.speaker{ font-weight: 700; }
+.q{ font-weight: 700; margin-bottom: 8px; }
+
+/* ============================================================
+   5. 카드 목록 (지구행 승선자)
+   ============================================================ */
+.cards{ padding: 22px var(--pad) 40px; display: flex; flex-direction: column; gap: 14px; }
+.card{
+  position: relative;
+  display: block;
+  height: 112px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #cfcfcf;
+  text-decoration: none;
+  isolation: isolate;
+}
+.card img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.card::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(0,0,0,.45) 100%);
+}
+.card-text{
+  position: absolute;
+  left: 18px; bottom: 14px;
+  z-index: 2;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+.card-title{ font-size: 15.5px; font-weight: 800; letter-spacing: -.4px; margin: 0 0 3px; }
+.card-sub{ font-size: 11.5px; font-weight: 500; letter-spacing: -.2px; opacity: .9; margin: 0; }
+
+/* ============================================================
+   6. 하단 사파리 바
+   ============================================================ */
+.safari{
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 10px 12px 10px;
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(0,0,0,.05);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+.round{
+  flex: none;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: #f1f1f3;
+  border: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: #1c1c1e;
+  cursor: pointer;
+}
+.urlbar{
+  flex: 1 1 auto;
+  height: 40px;
+  border-radius: 20px;
+  background: #f1f1f3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  font-size: 14px;
+  letter-spacing: -.2px;
+  color: #1c1c1e;
+}
+.urlbar .url{ flex: 1 1 auto; text-align: center; }
+.home-indicator{
+  position: absolute;
+  bottom: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 134px; height: 5px;
+  background: #000;
+  border-radius: 3px;
+  z-index: 11;
+}
+
+/* ============================================================
+   7. 좁은 화면 대응
+   ============================================================ */
+@media (max-width: 460px){
+  body{ padding: 0; background-image: none; }
+  .phone{
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .screen{
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    border-radius: 0;
+  }
+}
+</style>
 </head>
 <body>
-    <div class="card">
-        <h1 class="profile-title">내 이름 / 닉네임</h1>
-        <p class="bio">안녕하세요! 간단한 한 줄 소개글을 작성하는 공간입니다.</p>
-        
-        <div class="section-title">LIKE / DISLIKE</div>
-        <div class="tags">
-            <span class="tag">⭕ 독서</span>
-            <span class="tag">⭕ 음악</span>
-            <span class="tag">❌ 소음</span>
+
+<div class="phone">
+  <div class="screen">
+
+    <!-- 다이나믹 아일랜드 -->
+    <div class="island">
+      <span class="chip">★</span>
+      <span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="note">♪</span>
+    </div>
+
+    <!-- 상태바 -->
+    <div class="statusbar">
+      <span>12:25</span>
+      <span class="status-right">
+        <svg width="17" height="13" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true">
+          <path d="M8 9.6a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4zm0-3.4c1.1 0 2.1.4 2.9 1.1l-1 1.1A2.8 2.8 0 008 7.6c-.7 0-1.4.3-1.9.8l-1-1.1A4.3 4.3 0 018 6.2zm0-3.2c2 0 3.8.8 5.1 2l-1 1.1A5.9 5.9 0 008 4.6c-1.6 0-3 .6-4.1 1.5l-1-1.1A7.4 7.4 0 018 3zm0-3c2.9 0 5.5 1.1 7.4 3l-1 1.1A9 9 0 008 1.5 9 9 0 001.6 4.1l-1-1.1A10.4 10.4 0 018 0z"/>
+        </svg>
+        <span class="battery"><i></i></span>
+      </span>
+    </div>
+
+    <!-- 로고 -->
+    <header class="masthead">
+      <button class="icon-btn burger" type="button" aria-label="메뉴">
+        <i></i><i></i><i></i>
+      </button>
+      <div class="logo"><b>cosmos</b><span>magazine</span></div>
+      <div class="icons">
+        <button class="icon-btn" type="button" aria-label="검색">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>
+          </svg>
+        </button>
+        <button class="icon-btn" type="button" aria-label="언어">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- 탭 -->
+    <nav class="tabs">
+      <button class="tab is-active" type="button" data-tab="recode"><span class="star">★</span>이상</button>
+      <button class="tab" type="button" data-tab="jaeh"><span class="star">☆</span>lyh.com</button>
+      <button class="tab" type="button" data-tab="earth"><span class="star">★</span>그럼에도 불구하고</button>
+    </nav>
+
+    <!-- 본문 -->
+    <main class="viewport" id="viewport">
+
+      <!-- 1. 이상 -->
+      <section class="panel is-active" id="panel-recode">
+        <div class="article-head">
+          <p class="kicker">Account...</p>
+          <h1 class="headline">@unlessfarewell</h1>
+          <p class="standfirst">비주기성 프로텍트 계정</p>
+          <p class="date">2026.09.18</p>
         </div>
 
-        <div class="section-title">LINKS</div>
-        <a href="https://twitter.com" class="link-btn" target="_blank">X (Twitter)</a>
-        <a href="https://tistory.com" class="link-btn" target="_blank">Blog</a>
+        <div class="hero">
+          <img src="https://i.pinimg.com/1200x/0f/db/e2/0fdbe2c50ece1d5906b3d4c9e3040c99.jpg" alt="">
+          이미지 자리
+        </div>
+
+        <div class="article-body">
+          <p class="lede">영원</p>
+          <p><span class="handle">블랙배저</span> 이예현(main) <span class="handle">동일 장르</span> 최 윤(sub)</p>
+          <p>온리 NL 소비로 이예현이 포함된 모든 CP 유입 거부합니다 작품 스포일러 내용 별도로 필터링 하지 않아요</p>
+          <p>잠수 및 하차 시에는 반드시 미리 말씀드리며, 관계 정리 또한 편하게 말씀해 주시면 감사하겠습니다.</p>
+        </div>
+      </section>
+
+      <!-- 2. JAE.H -->
+      <section class="panel" id="panel-jaeh">
+        <div class="article-head">
+          <p class="kicker">INTERVIEW</p>
+          <h1 class="headline">차재현, 어둠 속에서 건져 올린 선율</h1>
+          <p class="standfirst">5oz의 키보디스트, 차재현이 말하는 음악, 상처, 그리고 사랑.</p>
+          <p class="date">2026.12.05</p>
+        </div>
+
+        <div class="hero">
+          <!-- 사진은 여기에 <img src="images/cover2.jpg" alt=""> 로 넣으세요 -->
+          이미지 자리
+        </div>
+
+        <div class="article-body">
+          <p class="q">5oz의 음악에서 본인의 역할은 무엇이라고 생각하나요? ‘중심’ 혹은 ‘저울추’라는 평이 많습니다.</p>
+          <p><span class="speaker">재현 :</span> 글쎄요. 중심이나 저울추 같은 거창한 말은 좀 낯간지럽네요. 그냥, 제가 해야 할 일을 하는 것뿐입니다. 곡의 전체적인 그림을 그리고, 멤버들이 각자의 자리에서 가장 빛날 수 있도록 판을 짜는 역할. 건반이라는 악기 자체가 멜로디와 화성을 동시에 끌고 갈 수 있으니까, 자연스럽게 그런 자리에 서게 된 것 같습니다.</p>
+          <p class="q">그렇다면 음악을 시작하게 된 계기는 무엇이었나요?</p>
+          <p><span class="speaker">재현 :</span> 어릴 때 집이 늘 조용했습니다. 그 조용함이 싫어서 건반을 눌렀던 게 시작이었어요. 누군가에게 들려주려던 건 아니었고, 그냥 방 안을 채워야 했습니다.</p>
+        </div>
+      </section>
+
+      <!-- 3. 지구행 승선자 -->
+      <section class="panel" id="panel-earth">
+        <div class="cards">
+          <a class="card" href="#">
+            <!-- <img src="images/card1.jpg" alt=""> -->
+            <div class="card-text">
+              <p class="card-title">상록 (常綠)</p>
+              <p class="card-sub">고요를 품은 새벽빛</p>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div class="card-text">
+              <p class="card-title">Synchronicity</p>
+              <p class="card-sub">그 언젠가의 세계에서 소년과 소녀는</p>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div class="card-text">
+              <p class="card-title">・・・</p>
+              <p class="card-sub">・ ・・ ・・ ・・</p>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div class="card-text">
+              <p class="card-title">ur3lysion</p>
+              <p class="card-sub">404: Love Not Found …until you.</p>
+            </div>
+          </a>
+          <a class="card" href="#">
+            <div class="card-text">
+              <p class="card-title">Nebula</p>
+              <p class="card-sub">별이 지는 자리에서 다시 만나</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 하단 사파리 바 -->
+    <div class="safari">
+      <button class="round" type="button" aria-label="뒤로">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 5l-7 7 7 7"/>
+        </svg>
+      </button>
+      <div class="urlbar">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="4" width="18" height="16" rx="3"/><path d="M7 9h10M7 13h7"/>
+        </svg>
+        <span class="url">keyboard.luv3r.me</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M20 11a8 8 0 10-2.3 5.7"/><path d="M20 5v6h-6"/>
+        </svg>
+      </div>
+      <button class="round" type="button" aria-label="더보기">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/>
+        </svg>
+      </button>
     </div>
+    <div class="home-indicator"></div>
+
+  </div>
+</div>
+
+<script>
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.panel');
+  var viewport = document.getElementById('viewport');
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('is-active'); });
+      panels.forEach(function (p) { p.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('is-active');
+      viewport.scrollTop = 0;
+    });
+  });
+</script>
+
 </body>
 </html>
