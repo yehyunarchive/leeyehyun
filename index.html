@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>sincerely for...</title>
+<title>cosmos magazine</title>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* ============================================================
@@ -30,34 +30,44 @@ html, body { margin: 0; padding: 0; }
   --radius-in:  48px;      /* 화면 모서리 */
   --radius-out: 60px;      /* 테두리 모서리 */
 
+  /* 화면이 좁으면 프레임째로 축소 (모바일 대응) */
+  --s: min(1, calc((100vw - 24px) / 414), calc((100vh - 24px) / 868));
+
   /* 좌우 여백 */
-  --pad: 22px;
+  --pad: 20px;
 }
 
 body{
-  background-color: var(--page-bg);
-  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
-  background-size: 22px 22px;
+  background: #ffffff;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 16px;
+  padding: 12px;
   font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
                "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* 축소된 프레임이 차지할 자리 */
+.stage{
+  width: calc(414px * var(--s));
+  height: calc(868px * var(--s));
+  flex: none;
 }
 
 /* ============================================================
    2. 폰 테두리
    ============================================================ */
 .phone{
-  width: calc(var(--phone-w) + var(--bezel-w) * 2);
+  width: 414px;
   background: var(--bezel);
   border-radius: var(--radius-out);
   padding: var(--bezel-w);
-  box-shadow: 0 24px 60px rgba(0,0,0,.22);
-  flex: none;
+  box-shadow: 0 18px 44px rgba(0,0,0,.18);
+  transform: scale(var(--s));
+  transform-origin: top left;
 }
 .screen{
   position: relative;
@@ -95,7 +105,7 @@ body{
   border-radius: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   z-index: 5;
 }
 .island .chip{
@@ -115,7 +125,7 @@ body{
 .island .wave i:nth-child(4){ height: 4px; }
 .island .wave i:nth-child(5){ height: 14px; }
 .island .wave i:nth-child(6){ height: 9px; }
-.island .note{ color: #fff; font-size: 14px; line-height: 1; }
+.island .note{ display: none; }
 .battery{
   width: 25px; height: 13px;
   border: 1.5px solid var(--ink);
@@ -147,8 +157,8 @@ body{
 }
 .icons{ margin-left: auto; }   /* 아이콘만 오른쪽 끝으로 */
 .logo{
-  font-size: 21px;
-  letter-spacing: -.4px;
+  font-size: 18px;
+  letter-spacing: -.6px;
   color: var(--ink);
 }
 .logo b{ font-weight: 800; }
@@ -173,9 +183,9 @@ body{
 .tab{
   background: none; border: 0; padding: 0;
   font: inherit;
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: -.3px;
+  letter-spacing: -.6px;
   color: var(--ink);
   cursor: pointer;
   display: inline-flex;
@@ -201,31 +211,32 @@ body{
 .panel{ display: none; }
 .panel.is-active{ display: block; }
 
-.article-head{ padding: 26px var(--pad) 24px; }
+.article-head{ padding: 22px var(--pad) 20px; }
 .kicker{
-  font-size: 12px;
-  letter-spacing: 1.6px;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: -.2px;
   color: var(--ink-mute);
-  margin: 0 0 14px;
+  margin: 0 0 11px;
 }
 .headline{
-  font-size: 23px;
+  font-size: 19px;
   font-weight: 800;
-  line-height: 1.34;
-  letter-spacing: -.7px;
+  line-height: 1.28;
+  letter-spacing: -.9px;
   color: var(--ink);
-  margin: 0 0 7px;
+  margin: 0 0 5px;
 }
 .standfirst{
-  font-size: 13.5px;
-  line-height: 1.5;
-  letter-spacing: -.3px;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: -.6px;
   color: var(--ink-soft);
-  margin: 0 0 22px;
+  margin: 0 0 18px;
 }
 .date{
-  font-size: 13px;
-  letter-spacing: -.2px;
+  font-size: 11.5px;
+  letter-spacing: -.4px;
   color: var(--ink-mute);
   margin: 0;
 }
@@ -242,13 +253,13 @@ body{
 .hero img{ width: 100%; height: 100%; object-fit: cover; display: block; }
 
 .article-body{
-  padding: 24px var(--pad) 40px;
-  font-size: 14px;
-  line-height: 1.75;
-  letter-spacing: -.35px;
+  padding: 18px var(--pad) 32px;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: -.6px;
   color: var(--ink);
 }
-.article-body p{ margin: 0 0 15px; }
+.article-body p{ margin: 0 0 11px; }
 .article-body p:last-child{ margin-bottom: 0; }
 .lede{ font-weight: 700; }
 .handle{ color: #9b9b9b; }
@@ -286,8 +297,8 @@ body{
   color: #fff;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
-.card-title{ font-size: 15.5px; font-weight: 800; letter-spacing: -.4px; margin: 0 0 3px; }
-.card-sub{ font-size: 11.5px; font-weight: 500; letter-spacing: -.2px; opacity: .9; margin: 0; }
+.card-title{ font-size: 13.5px; font-weight: 800; letter-spacing: -.7px; margin: 0 0 2px; }
+.card-sub{ font-size: 10px; font-weight: 500; letter-spacing: -.5px; opacity: .9; margin: 0; }
 
 /* ============================================================
    6. 하단 사파리 바
@@ -324,8 +335,8 @@ body{
   align-items: center;
   gap: 10px;
   padding: 0 14px;
-  font-size: 14px;
-  letter-spacing: -.2px;
+  font-size: 13px;
+  letter-spacing: -.4px;
   color: #1c1c1e;
 }
 .urlbar .url{ flex: 1 1 auto; text-align: center; }
@@ -340,27 +351,14 @@ body{
 }
 
 /* ============================================================
-   7. 좁은 화면 대응
+   7. 참고: 화면이 좁아지면 :root의 --s 값이 프레임 전체를
+   비율 그대로 줄여 주므로 별도의 모바일 분기는 없습니다.
    ============================================================ */
-@media (max-width: 460px){
-  body{ padding: 0; background-image: none; }
-  .phone{
-    width: 100%;
-    padding: 0;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  .screen{
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    border-radius: 0;
-  }
-}
 </style>
 </head>
 <body>
 
+<div class="stage">
 <div class="phone">
   <div class="screen">
 
@@ -368,7 +366,6 @@ body{
     <div class="island">
       <span class="chip">★</span>
       <span class="wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-      <span class="note">♪</span>
     </div>
 
     <!-- 상태바 -->
@@ -404,32 +401,32 @@ body{
 
     <!-- 탭 -->
     <nav class="tabs">
-      <button class="tab is-active" type="button" data-tab="recode"><span class="star">★</span>이상</button>
-      <button class="tab" type="button" data-tab="jaeh"><span class="star">☆</span>lyh.com</button>
-      <button class="tab" type="button" data-tab="earth"><span class="star">★</span>그럼에도 불구하고</button>
+      <button class="tab is-active" type="button" data-tab="recode"><span class="star">★</span>재현하다</button>
+      <button class="tab" type="button" data-tab="jaeh"><span class="star">☆</span>JAE.H</button>
+      <button class="tab" type="button" data-tab="earth"><span class="star">★</span>지구행 승선자</button>
     </nav>
 
     <!-- 본문 -->
     <main class="viewport" id="viewport">
 
-      <!-- 1. 이상 -->
+      <!-- 1. 재현하다 -->
       <section class="panel is-active" id="panel-recode">
         <div class="article-head">
-          <p class="kicker">Account...</p>
-          <h1 class="headline">@unlessfarewell</h1>
-          <p class="standfirst">비주기성 프로텍트 계정</p>
-          <p class="date">2026.09.18</p>
+          <p class="kicker">INTERVIEW</p>
+          <h1 class="headline">포말 지구 "소행성 관찰 기록"</h1>
+          <p class="standfirst">cosmos 소행성 관찰 기록 발매 인터뷰</p>
+          <p class="date">2026.01.25</p>
         </div>
 
         <div class="hero">
-          <img src="https://i.pinimg.com/1200x/0f/db/e2/0fdbe2c50ece1d5906b3d4c9e3040c99.jpg" alt="">
+          <!-- 사진은 여기에 <img src="images/cover1.jpg" alt=""> 로 넣으세요 -->
           이미지 자리
         </div>
 
         <div class="article-body">
-          <p class="lede">영원</p>
-          <p><span class="handle">블랙배저</span> 이예현(main) <span class="handle">동일 장르</span> 최 윤(sub)</p>
-          <p>온리 NL 소비로 이예현이 포함된 모든 CP 유입 거부합니다 작품 스포일러 내용 별도로 필터링 하지 않아요</p>
+          <p class="lede">포말 or 지구 AI 이미지 생성 및 비윤리적 소재 O</p>
+          <p><span class="handle">@ohnyu</span> 차재현(main) <span class="handle">@toyoman</span> 스펙터(예정…)</p>
+          <p>소수계 타임라인 지향하여 제가 먼저 팔로우 드렸어도 이미 상단 메인 캐릭터를 메인으로 두고 계신 분이 있다면 요청 거절 부탁드립니다. 고정(@ohnyu-차재현) 제외하고는 올라오는 찍먼 배려해 주지 않으셔도 괜찮습니다. 다인 맥멘션 시 서브 계정으로 답장이 늦어질 수 있는 점 양해 부탁드립니다.</p>
           <p>잠수 및 하차 시에는 반드시 미리 말씀드리며, 관계 정리 또한 편하게 말씀해 주시면 감사하겠습니다.</p>
         </div>
       </section>
@@ -520,6 +517,7 @@ body{
     <div class="home-indicator"></div>
 
   </div>
+</div>
 </div>
 
 <script>
