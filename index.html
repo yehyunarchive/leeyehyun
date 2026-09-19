@@ -112,10 +112,28 @@
 
   .signature{
     margin-top:1.2em;
+    margin-bottom:0;
     font-size:1em;
     font-weight:700;
     letter-spacing:var(--tracking);
     color:var(--text-main);
+  }
+  /* 서명 바로 다음 문단만 줄바꿈(enter 1번) 정도로 붙임 */
+  .signature + .body-text{
+    margin-top:0;
+  }
+
+  /* 형광펜 (연한 회색) */
+  .highlight{
+    background: rgba(154,154,154,0.32);
+    padding: 0 0.15em;
+    border-radius: 2px;
+  }
+
+  /* 밑줄 */
+  .underline{
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
   }
 
   .placeholder{
@@ -153,6 +171,7 @@
         <p class="body-text">only NL 소비 성향으로 상단 캐릭터가 관련된 동인이 아니더라도 공식이 아닌 이상 유입 거부합니다 모든 작품의 스포일러 별도로 필터링 하지 않으므로 유의 바랍니다 또한 편하게 쓰는 계정인 만큼 타 계정과 달리 상당히 예민하고 언행이 거친 편입니다 불편할 시 팔로우 재고 편하게 해 주세요</p>
         <p class="signature">견제 내지 영향 받기 위한 모든 행동 하지 마세요</p>
         <p class="body-text">특히 트윗 캡쳐나 조회수 늘리기 목적의 사찰에 상당한 거부감을 가지고 있습니다</p>
+        <p class="body-text">예시로 이렇게 <span class="highlight">형광펜으로 강조</span>하거나, <span class="underline">밑줄로 강조</span>하거나, <span class="highlight underline">두 개를 함께</span> 쓸 수도 있습니다</p>
       </section>
 
       <section data-panel="2">
