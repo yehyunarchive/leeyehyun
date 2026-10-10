@@ -2,219 +2,160 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sincerely...</title>
-<link rel="stylesheet" as="style" crossorigin
-  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>@unlessfarewell</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
-  /*
-    ====== 비례 스케일 설정 ======
-    --base 하나만 바꾸면 글자 크기 · 자간 · 행간 · 여백이 전부 같은 비율로
-    따라서 조정됩니다. (자간·행간은 em/배수 단위라 각 요소의 font-size에
-    비례해서 자동으로 커지고 작아짐)
-
-    예) --base: 11px  →  --base: 14px 로만 바꿔도 전체가 커집니다.
-  */
   :root{
-    --base: 10.5px;          /* 본문 글자 크기 = 기준값 */
-    --tracking: -0.07em;  /* 자간 (모든 요소 공통, em 단위라 비례 유지) */
-
-    --text-main:#191919;
-    --text-sub:#9a9a9a;
-    --border:#e7e7e7;
-    --bg:#ffffff;
+    --bg:#fdfdfd;
+    --ink:#3a3a3a;      /* 기본 글자색 */
+    --strong:#2b2b2b;   /* 볼드 글자색 */
+    --mute:#9a9a9a;     /* 연한 회색 글자 */
+    --line:#d9d9d9;
   }
-  *{ box-sizing:border-box; }
-  html,body{
-    margin:0;
-    padding:0;
-    height:100%;
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif}
+  html,body{height:100%}
+  body{
     background:var(--bg);
-    color:var(--text-main);
-    font-family:'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    color:var(--ink);
+    font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+    font-size:7px;
+    line-height:1.45;
+    -webkit-text-size-adjust:100%;text-size-adjust:100%;
+    letter-spacing:-0.7px;      /* 자간 */
     -webkit-font-smoothing:antialiased;
   }
-  body{
+  .wrap{
+    min-height:100vh;
+    min-height:100dvh;
     display:flex;
-    align-items:center;      /* 세로 중앙 */
-    justify-content:center;  /* 가로 중앙 */
-    min-height:100vh;   /* 구형 브라우저 대비 fallback */
-    min-height:100dvh;  /* 모바일 주소창 접힘/펼침에 대응하는 실제 보이는 높이 */
-    padding:24px 0;      /* 내용이 화면보다 길 때도 위아래 여백 확보 */
+    padding:40px 24px;
   }
-  .page{
-    width:100%;
-    max-width:340px;
-    padding:2.5em 1.4em;   /* .page 자체 font-size(=--base) 기준 비례 여백 */
-    font-size:var(--base); /* 이 아래 모든 em 값의 기준점 */
-  }
+  .card{width:max-content;max-width:100%;text-align:left;margin:auto}
+  .page{display:none}
+  .page.on{display:block}
 
-  /* 탭 */
-  .tabs{
-    display:flex;
-    gap:1.1em;
-    font-size:1em;
-    font-weight:600;
-    letter-spacing:var(--tracking);
-    color:var(--text-sub);
-    cursor:default;
-    user-select:none;
-  }
-  .tabs .tab{
-    cursor:pointer;
-    color:var(--text-sub);
-    transition:color .15s ease;
-  }
-  .tabs .tab:hover{
-    color:var(--text-main);
-  }
-  .tabs .tab.active{
-    color:var(--text-main);
-  }
-  .tabs .tab .num{
-    font-weight:700;
-  }
+  p{margin:0}
+  .gap{height:.9em}
+  b{font-weight:700;color:var(--strong)}
+  i{font-style:italic}
+  .id{font-style:italic;font-weight:600;color:var(--strong);font-size:6.5px;margin-bottom:1.5em}
+  .id span{font-weight:400}
+  .sm{font-size:5px;color:var(--mute);letter-spacing:-0.7px;vertical-align:super;line-height:0}
+  sup{font-size:4px;vertical-align:super;line-height:0;letter-spacing:-0.7px}
+  sub{font-size:4px;vertical-align:sub;line-height:0;letter-spacing:-0.7px}
+  .mute{color:var(--mute)}
+  .mute-s{color:var(--mute);font-size:7px}
 
-  /* 탭과 본문 사이 여백 (base 대비 비례) */
-  .content{
-    margin-top:3em;
-  }
+  .more{display:block;text-align:right;margin-top:1.8em;font-size:5.5px;color:var(--ink);
+        text-decoration:none;cursor:pointer;background:none;border:0;
+        font-family:inherit;letter-spacing:-0.7px;margin-left:auto;padding:0}
+  .more.left{margin-left:0;text-align:left}
 
-  .title{
-    font-size:1.3em;      /* base 대비 배수라 --base 변경 시 함께 커짐 */
-    font-weight:700;
-    letter-spacing:var(--tracking);
-    line-height:1.35;
-    margin:0 0 0.9em;
-  }
-
-  .subtitle{
-    font-size:1em;
-    font-weight:500;
-    letter-spacing:var(--tracking);
-    line-height:1.45;
-    margin:0 0 1.4em;
-    color:var(--text-sub);
-  }
-  .subtitle .strong{
-    color:var(--text-main);
-    font-weight:700;
-  }
-
-  /* 본문에서 재사용하는 굵게 강조 (subtitle 밖에서도 사용) */
-  .strong{
-    color:var(--text-main);
-    font-weight:700;
-  }
-
-  .body-text{
-    font-size:1em;
-    font-weight:400;
-    letter-spacing:var(--tracking);
-    line-height:1.5;
-    color:var(--text-main);
-    white-space:pre-line;
-  }
-
-  .signature{
-    margin-top:1.2em;
-    margin-bottom:0;
-    font-size:1em;
-    font-weight:700;
-    line-height:1.5;
-    letter-spacing:var(--tracking);
-    color:var(--text-main);
-  }
-  /* 서명 바로 다음 문단만 줄바꿈(enter 1번) 정도로 붙임 */
-  .signature + .body-text{
-    margin-top:0;
-  }
-
-  /* 형광펜 (연한 회색) */
-  .highlight{
-    background: rgba(154,154,154,0.32);
-    padding: 0 0.15em;
-    border-radius: 2px;
-  }
-
-  /* 밑줄 */
-  .underline{
-    text-decoration: underline;
-    text-underline-offset: 0.15em;
-  }
-
-  .placeholder{
-    font-size:0.9em;
-    letter-spacing:var(--tracking);
-    line-height:1.5;
-    color:var(--text-sub);
-  }
-
-  [data-panel]{ display:none; }
-  [data-panel].active{ display:block; }
-
-  @media (max-width: 360px){
-    .page{
-      padding:2.2em 1.1em;
-    }
-  }
+  /* caution */
+  .caution-btn{display:inline-block;margin-top:1.4em;font-family:inherit;font-size:7px;
+        letter-spacing:-0.7px;color:var(--mute);background:none;border:0;cursor:pointer;padding:0}
+  .caution-btn b{color:var(--strong)}
+  .caution-btn .arrow{display:inline-block;transition:transform .2s;font-size:5.5px;margin-left:3px}
+  .caution-btn[aria-expanded="true"] .arrow{transform:rotate(90deg)}
+  .caution-box{display:none;margin-top:.8em;border:1px solid var(--line);height:84px;width:0;min-width:100%;overflow-y:auto;
+        padding:8px 10px;font-size:7px;line-height:1.45;background:#fff;-webkit-overflow-scrolling:touch}
+  .caution-box.on{display:block}
+  .caution-box::-webkit-scrollbar{width:4px}
+  .caution-box::-webkit-scrollbar-thumb{background:#ccc}
+  .caution-box p+p{margin-top:.8em}
 </style>
 </head>
 <body>
+<div class="wrap">
+  <div class="card">
 
-  <div class="page">
+    <!-- ============ PAGE 1 ============ -->
+    <section class="page on" id="p1">
+      <p class="id">( <span style="font-weight:600">@unlessfarewell</span> )</p>
 
-    <nav class="tabs">
-      <span class="tab active" data-target="1"><span class="num">❶</span> 理想</span>
-      <span class="tab" data-target="2"><span class="num">❷</span> eternity</span>
-      <span class="tab" data-target="3"><span class="num">❸</span> 그럼에도 불구하고</span>
-    </nav>
+      <p>20<sup>+</sup> Non cyclical protect account</p>
+      <p><b>영원</b> <span class="sm">실명 등 기타 호칭 사용 지양</span></p>
 
-    <div class="content">
+      <div class="gap"></div>
 
-      <section data-panel="1" class="active">
-        <p class="title">( unlessfarewell )</p>
-        <p class="subtitle"><span class="strong">블랙배저 이예현</span> <span style="color:#6b6b6b; font-weight:400;">외 동일 장르 최윤 (sub)</span></p>
-        <p class="body-text">only NL 소비 성향으로 상단 캐릭터가 관련된 동인이 아니더라도 공식이 아닌 이상 유입 거부합니다 모든 작품의 스포일러 별도로 필터링 하지 않으므로 유의 바랍니다 또한 소수 인원만 모집한 계정인 만큼 내키는 대로 사용하며 상당히 예민하고 언행이 거친 편입니다 불편할 시 팔로우 재고 편하게 해 주세요</p>
-        <p class="signature">견제 내지 영향 받기 위한 모든 행동 하지 마세요</p>
-        <p class="body-text">특히 트윗 캡쳐나 조회수 늘리기 목적의 사찰에 상당한 거부감을 가지고 있습니다</p>
-      </section>
+      <p><b>블랙배저</b> 이예현<sup>(썬더다운 ㎡)</sup> <b>only</b> 1T 1D</p>
+      <p>배려 필수로 요합니다 겹드림러 연결 블락</p>
+      <p>외에도 동일 장르 드림 및 개인 봇 언급 찾아요</p>
+      <p><sup>*)</sup> 계정 특성상 불호 요소에 대해 거칠게 말합니다</p>
 
-      <section data-panel="2">
-        <p class="body-text">(1) 배려 부분에 한하는 게 아닌 기타 부분에서도 상당히 예민합니다...... 타인에게서 발화되는 이예현 관련 모든 부정적인 이야기 못 보며 유입 시 친분 무관 블락합니다 또한 캐릭터의 서사 내 학대 및 방임 요소가 포함되어 있으므로 주의해 주세요</p>
-        <p class="body-text">(2) 괜히 저랑 기싸움 하겠다고 상호 팔로우 되어있는 계정에서 저를 특정한 허공 저격 트윗 작성이나 성향글에 제 행동과 유사한 사항 지뢰사항에 기입하면서 시녀딸 받지 마시고 디엠 주세요 피차 서로에게 부끄럽지 않게 지냅시다</p>
-        <p class="body-text"><span class="strong">(3) 승현 → 윤 ← 예현 (화살표 방향 상관 X) 의 구조를 띄는 동인 유입은 블락으로 대응합니다</span> 이외에도 위치 상관없이 이예현이 포함된 모든 동인 극도로 싫어하며 유입하지 마세요 <span style="color:#6b6b6b; font-weight:400;">(+ 타장르 강차 정말 싫어합니다 애시당초 차주한 게이 캐해 같은 게 왜 존재하는 건지도 모르겠고 예전에 모종의 일이 많았어서 악감정이 큽니다)</span></p>
+      <div class="gap"></div>
 
-       <p class="body-text">자주 언급하는 캐릭터 외에도 차주한, 아드리안 아스카니엔 및 해당 장르 언급이 존재합니다 별도의 배려 요구하지 않으며 기타 사담계 또는 드림계 연결 시에만 배려 요합니다 그러나 최소한 직멘이나 QT 유입 도배는 삼가해 주세요 </p>
-       <p class="body-text"><span style="color:#6b6b6b; font-weight:400;">etc. 오버워치, 찬민, 어바등... 기타 웹소 및 1차 BL</span></p>
-      </section>
+      <p><b>NG</b></p>
+      <p><sup>1)</sup> 블랙배저 내 모든 동인 커플링</p>
+      <p><sup>2)</sup> 사찰 및 대리 견제</p>
 
-      <section data-panel="3">
-        <p class="body-text">( caution ) 내용이 상당히 기나 굳이 읽으실 필요는 없습니다</p>
-                <p class="body-text">이예현 정실 및 여자친구 발언 다수 해당 성향 이해 불가하신 분들과는 친분을 무관하고 연결 원치 않습니다 일전 언급한 성향에 대해 우호적인 태도가 아니라고 판단될 경우 상시 팔로우 재고하므로 연결 신중히 선택해 주세요</p>
-        <p class="body-text"><span class="strong">이승현의 과거 행동에 대한 옹호</span> 내지 정당화성 발언을 보면 제 정신이 너무 아파집니다 하지 마시고 유입하지도 마세요
-        <p class="body-text">편하게 쓰는 계정인 만큼 개인정보 노출이 잦고 비판적인 내용의 트윗이나 마이너스 플로우 종종 가지고 옵니다 그 중 특히 재학 중인 대학이나 학과에 대해서는 한참 전에 인증 마친 상태이므로 관련 질문 내지 의혹은 사양해요 믿는지 안 믿는지는 제가 상관할 부분도 아니고 과시 목적도 아닙니다 <span class="underline">추가적으로 제 모든 사적 개인정보를 멘션 포함 제3자가 볼 수 있는 공간에서 언급하지 마시고 유출도 하지 마세요</span></p>
-        <p class="body-text">주력 장르 및 정실 자주 바뀌는 것 스스로도 잘 인지하고 있습니다 매번 별도의 배려 요하지 않는 것도 해당 사유에 포함되며 괜히 이런 걸로 눈치 주지 마시고 불편하면 선블락을 하시길 바랍니다 정말 피곤하고 매번 겨냥하시는 거 지겹습니다 트윗이나 유사성 발언에 호응 안 해 주셔도 되니까 관련 얘기 적당히 하세요</p>
-        <p class="body-text">성향이 정말 예민합니다 친분을 무관하고 지뢰 사항 내지는 관련 뉘앙스 언급 시 블블하며 무슨 일이 있어도 재연결하지 않습니다 제발 성향글 똑바로 읽고 팔로우 주세요</p>
-        <p class="body-text"><span class="strong">AI 채팅 드림 및 짤뽑러와 지인이신 경우 모든 연결 수단 끊어주세요</span></p>
-      </section>
+      <button class="more" data-go="p2">*more</button>
+    </section>
 
-    </div>
+    <!-- ============ PAGE 2 ============ -->
+    <section class="page" id="p2">
+      <p class="mute-s">ⓘ 예민합니다 대부분은 스루하나 볼드체의 경우 유입 즉각 블락 대처</p>
+
+      <div style="height:.45em"></div>
+      <p><b>이예현 드림</b> 有 관련 모든 스포일러 요소 필터링 X</p>
+      <p>외에도 오버워치, 변호됨, 마차살 등 이전 장르 언급</p>
+      <p>장르 찍먹 상관하지 않지만 친분 및 배려 목적으로 읽는 건 싫습니다</p>
+      <p>자연 발생 시 무조건 제 쪽 팔로우 끊어주세요</p>
+
+      <div class="gap"></div>
+
+      <p>최 윤 또는 이예현 2차 동인 CP 극 거부합니다</p>
+      <p>특히 <b>승현윤</b> (리버스 포함) 유입 친분 무관 즉각 블락해요</p>
+      <p>추가로 변호됨 <b>강차</b>도 이하 동일히 합니다</p>
+      <p>제가 먼저 언급하는 분 아닌 이상 블배 장르 X</p>
+
+      <div class="gap"></div>
+
+      <p>불특정 다수에게 노출될 만한 연락망으로 제 개인정보 발설하지 마세요</p>
+      <p><b>사찰하지 마시고 제 말투나 미디어에 어떠한 영향도 받지 마세요</b></p>
+      <p><b>AI 채팅 소비</b> 거부해요 소비러와 연결하신 분도 내키지 않습니다</p>
+
+      <p class="mute-s" style="margin-top:.7em">최근 들어 말투가 상당히 험할 가능성이 크나 타임라인 내 누군가를 특정<br>하는 트윗은 작성하지 않습니다 있어도 사담계에만 있습니다</p>
+
+      <!-- caution (접는 글) -->
+      <button class="caution-btn" id="cBtn" aria-expanded="false" aria-controls="cBox">
+        <b>caution</b><span class="arrow">▶</span>
+      </button>
+      <div class="caution-box" id="cBox">
+        <p>이 계정은 비공개 전환, 차단, 언팔로우가 예고 없이 진행될 수 있습니다. 개인 감정 문제가 아니니 이유를 묻지 말아주세요.</p>
+        <p>멘션 및 DM 답장이 늦거나 없을 수 있습니다. 답장이 없다고 해서 불쾌해하지 마시고, 재촉하지 말아주세요.</p>
+        <p>리트윗, 마음, 인용 등 반응 여부와 관계없이 제 타임라인에는 제가 편한 글만 올립니다. 반응이 없다고 서운해하지 마세요.</p>
+        <p>제 글 및 그림, 2차 창작물의 무단 전재, 캡처 공유, 타 플랫폼 업로드를 금지합니다.</p>
+        <p>친분 있는 분의 팔로우 및 블락 내역, 대화 내용을 제3자에게 전달하지 마세요. 확인되는 즉시 관계를 정리합니다.</p>
+        <p>위 내용에 동의하시는 분만 팔로우해주세요. 팔로우 시 이 글을 모두 읽은 것으로 간주합니다.</p>
+        <p class="mute">— end —</p>
+      </div>
+    </section>
+
   </div>
+</div>
 
 <script>
-  const tabs = document.querySelectorAll('.tab');
-  const panels = document.querySelectorAll('[data-panel]');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-target');
-      tabs.forEach(t => t.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-      tab.classList.add('active');
-      document.querySelector('[data-panel="' + target + '"]').classList.add('active');
-    });
+  const pages = {p1: document.getElementById('p1'), p2: document.getElementById('p2')};
+  function show(id){
+    Object.values(pages).forEach(p => p.classList.remove('on'));
+    pages[id].classList.add('on');
+    history.replaceState(null, '', id === 'p2' ? '#2' : location.pathname);
+    window.scrollTo(0, 0);
+  }
+  document.querySelectorAll('[data-go]').forEach(b =>
+    b.addEventListener('click', () => show(b.dataset.go)));
+  if (location.hash === '#2') show('p2');
+
+  const cBtn = document.getElementById('cBtn');
+  const cBox = document.getElementById('cBox');
+  cBtn.addEventListener('click', () => {
+    const open = cBox.classList.toggle('on');
+    cBtn.setAttribute('aria-expanded', open);
   });
 </script>
-
 </body>
 </html>
