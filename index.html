@@ -37,6 +37,7 @@
   .page{display:none}
   .page.on{display:block}
 
+  .en{letter-spacing:-0.5px}   /* 영어/숫자만 자간 */
   p{margin:0}
   .gap{height:.9em}
   b{font-weight:700;color:var(--strong)}
@@ -138,6 +139,25 @@
   </div>
 </div>
 
+<script>
+  // 영어·숫자 구간만 .en 으로 감싸서 자간 -0.5px 적용
+  (function(){
+    const re = /[A-Za-z0-9@]+(?: [A-Za-z0-9@]+)*/g;
+    const w = document.createTreeWalker(document.querySelector('.card'), NodeFilter.SHOW_TEXT);
+    const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+    nodes.forEach(n => {
+      const t = n.nodeValue; if (!re.test(t)) return; re.lastIndex = 0;
+      const f = document.createDocumentFragment(); let last = 0, m;
+      while ((m = re.exec(t))) {
+        if (m.index > last) f.append(t.slice(last, m.index));
+        const sp = document.createElement('span'); sp.className = 'en'; sp.textContent = m[0]; f.append(sp);
+        last = m.index + m[0].length;
+      }
+      if (last < t.length) f.append(t.slice(last));
+      n.replaceWith(f);
+    });
+  })();
+</script>
 <script>
   const pages = {p1: document.getElementById('p1'), p2: document.getElementById('p2')};
   function show(id){
