@@ -177,25 +177,35 @@
 
 <!-- SoundCloud BGM (숨김 플레이어) : 아무 곳이나 처음 클릭하면 재생 -->
 <iframe id="scBgm" allow="autoplay"
-  style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;border:0"></iframe>
+  style="position:fixed;left:0;bottom:0;width:2px;height:2px;opacity:0.01;pointer-events:none;border:0"></iframe>
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
-  // ▼▼▼ 여기에 사운드클라우드 곡 주소를 넣으세요 ▼▼▼
-  const TRACK_URL = "https://soundcloud.com/n5mbofby2qn0/2132a1?ref=clipboard&p=i&c=0&si=D4D855F64D344A33AF86866747168A1B&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing";
-  // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+  // ▼▼▼ 여기에 사운드클라우드 곡 주소를 넣으세요 (soundcloud.com/아티스트/곡 형태의 전체 주소 권장) ▼▼▼
+  const TRACK_URL = "https://soundcloud.com/n5mbofby2qn0/2132a1";
+  // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
   const frame = document.getElementById('scBgm');
   frame.src = 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(TRACK_URL) +
               '&auto_play=false&hide_related=true&show_comments=false&show_user=false&visual=false';
 
   const sc = SC.Widget(frame);
-  let started = false;
-  sc.bind(SC.Widget.Events.FINISH, () => { sc.seekTo(0); sc.play(); }); // 끝나면 반복
-  document.addEventListener('click', () => {
-    if (started) return;
-    started = true;
-    sc.play();
+  let ready = false, wantPlay = false, playing = false;
+
+  sc.bind(SC.Widget.Events.READY, () => {
+    ready = true;
+    if (wantPlay) sc.play();          // 클릭이 먼저였으면 준비되자마자 재생
   });
+  sc.bind(SC.Widget.Events.PLAY,   () => { playing = true; });
+  sc.bind(SC.Widget.Events.ERROR,  e => console.warn('SoundCloud 오류: 곡 주소를 확인하세요', e));
+  sc.bind(SC.Widget.Events.FINISH, () => { sc.seekTo(0); sc.play(); });   // 끝나면 반복
+
+  // 클릭/터치할 때마다 (재생 중이 아니면) 재생 시도 → 첫 클릭이 막혀도 다음 클릭에서 재시도
+  ['click','touchend'].forEach(ev =>
+    document.addEventListener(ev, () => {
+      if (playing) return;
+      wantPlay = true;
+      if (ready) sc.play();
+    }, {passive:true}));
 </script>
 </body>
 </html>
