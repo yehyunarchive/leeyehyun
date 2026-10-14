@@ -1,211 +1,55 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>@unlessfarewell</title>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
-  :root{
-    --bg:#ffffff;
-    --ink:#3a3a3a;      /* 기본 글자색 */
-    --strong:#2b2b2b;   /* 볼드 글자색 */
-    --mute:#9a9a9a;     /* 연한 회색 글자 */
-    --line:#d9d9d9;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif}
-  html,body{height:100%}
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Pretendard Variable','Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
-    font-size:7px;
-    line-height:1.45;
-    -webkit-text-size-adjust:100%;text-size-adjust:100%;
-    letter-spacing:-0.65px;      /* 자간 */
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{
-    min-height:100vh;
-    min-height:100dvh;
-    display:flex;
-    padding:40px 24px;
-  }
-  .card{width:max-content;max-width:100%;text-align:left;margin:auto}
-  .page{display:none}
-  .page.on{display:block}
-
-  .en{letter-spacing:-0.5px}   /* 영어/숫자만 자간 */
-  p{margin:0}
-  .gap{height:.9em}
-  b{font-weight:700;color:var(--strong)}
-  i{font-style:italic}
-  .id{font-style:normal;font-weight:400;color:var(--strong);font-size:6.5px;margin-bottom:1.5em}
-  .id b,.id b .en{font-weight:700;font-style:italic}
-  .sm{font-size:5px;color:var(--mute);letter-spacing:-0.7px;vertical-align:super;line-height:0}
-  sup{font-size:4px;vertical-align:super;line-height:0;letter-spacing:-0.7px}
-  sub{font-size:4px;vertical-align:sub;line-height:0;letter-spacing:-0.7px}
-  .mute{color:var(--mute)}
-  .mute-s{color:var(--mute);font-size:7px}
-
-  .more{display:block;text-align:right;margin-top:1.8em;font-size:5.5px;color:var(--ink);
-        text-decoration:none;cursor:pointer;background:none;border:0;
-        font-family:inherit;letter-spacing:-0.7px;margin-left:auto;padding:0}
-  .more.left{margin-left:0;text-align:left}
-
-  /* caution */
-  .caution-btn{display:inline-block;margin-top:1.4em;font-family:inherit;font-size:7px;
-        letter-spacing:-0.7px;color:var(--mute);background:none;border:0;cursor:pointer;padding:0}
-  .caution-btn b{color:var(--strong)}
-  .caution-btn .arrow{display:inline-block;transition:transform .2s;font-size:5.5px;margin-left:3px}
-  .caution-btn[aria-expanded="true"] .arrow{transform:rotate(90deg)}
-  .caution-box{display:none;margin-top:.8em;border:1px solid var(--line);height:84px;width:0;min-width:100%;overflow-y:auto;
-        padding:8px 10px;font-size:7px;line-height:1.45;background:#fff;-webkit-overflow-scrolling:touch}
-  .caution-box.on{display:block}
-  .caution-box::-webkit-scrollbar{width:4px}
-  .caution-box::-webkit-scrollbar-thumb{background:#ccc}
-  .caution-box p+p{margin-top:.8em}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="card">
-
-    <!-- ============ PAGE 1 ============ -->
-    <section class="page on" id="p1">
-      <p class="id">( <b>@unlessfarewell</b> )</p>
-
-      <p>20<sup>+</sup> Non cyclical protect account</p>
-      <p><b>영원</b> <span class="sm">실명 등 기타 호칭 사용 지양</span></p>
-
-      <div class="gap"></div>
-
-      <p><b>블랙배저</b> 이예현<sup>(썬터다운 作)</sup> <b>only</b> 1T 1D</p>
-      <p>배려 필수로 요합니다 겹드림러 연결 블락</p>
-      <p>외에도 동일 장르 드림 및 개인 봇 언급 찾아요</p>
-      <p>⁺⁾ 계정 특성상 불호 요소에 대해 거칠게 말합니다</p>
-
-      <div class="gap"></div>
-
-      <p><b>NG</b></p>
-      <p>¹⁾ 블랙배저 내 모든 동인 커플링</p>
-      <p>²⁾ 사찰 및 대리 견제</p>
-
-      <button class="more" data-go="p2">*more</button>
-    </section>
-
-    <!-- ============ PAGE 2 ============ -->
-    <section class="page" id="p2">
-      <p class="mute-s">ⓘ 예민합니다 대부분은 스루하나 볼드체의 경우 유입 즉각 블락 대처</p>
-
-      <div style="height:.45em"></div>
-      <p><b>최윤 드림</b> 有 관련 모든 스포일러 요소 필터링 X</p>
-      <p>외에도 차주한, 아드리안 아스카니엔 등 기타 장르 언급</p>
-      <p>장르 찍먹 상관하지 않지만 친분 목적으로 읽는 건 싫습니다</p>
-      <p>자연 발생 시 무조건 제 쪽 팔로우 끊어주세요</p>
-
-      <div class="gap"></div>
-
-      <p>위치 상관없이 이예현 및 최윤이 포함된 모든 2차 동인 거부</p>
-      <p>특히 <b>승현 → 윤 ← 예현</b> (화살표 방향 무관) 유입은 즉각 블락해요</p>
-      <p>추가로 변호됨 <b>강차</b>도 이하 동일히 합니다</p>
-      <p>제가 먼저 언급하는 분 아닌 이상 블배 장르계 X</p>
-
-      <div class="gap"></div>
-
-      <p>불특정 다수에게 노출될 만한 연락망으로 제 개인정보 발설하지 마세요</p>
-      <p><b>AI 채팅 드림</b> 및 짤뽑러와 지인이신 경우 모든 연결 수단 끊어주세요</p>
-      <p><b>견제 내지 영향 받기 위한 모든 행동 하지 마세요</b></p>
-
-      <p class="mute-s" style="margin-top:.7em">배려 부분에서 한하는 게 아닌 모든 방향에서 상당히 예민합니다<br>불편하실 경우 언제든 연결 재고 부탁드립니다</p>
-
-      <!-- caution (접는 글) -->
-      <button class="caution-btn" id="cBtn" aria-expanded="false" aria-controls="cBox">
-        <b>caution</b><span class="arrow">▶</span>
-      </button>
-      <div class="caution-box" id="cBox">
-        <p>이예현 정실 및 여자친구 발언 다수 해당 성향 이해 불가하신 분들과는 친분을 무관하고 연결 원치 않습니다 일전 언급한 성향에 대해 우호적인 태도가 아니라고 판단될 경우 상시 팔로우 재고합니다</p>
-        <p>편하게 쓰는 계정인 만큼 개인정보 노출이 잦고 비판적인 내용의 트윗이나 마이너스 플로우 종종 가지고 옵니다 그 중 특히 재학 중인 대학이나 학과에 대해서는 한참 전에 인증 마친 상태이므로 관련 질문 내지 의혹은 사양해요 믿는지 안 믿는지는 제가 상관할 부분도 아니고 과시 목적도 아닙니다</p>
-        <p>주력 장르 및 정실 자주 바뀌는 것 스스로도 잘 인지하고 있습니다 매번 별도의 배려 요하지 않는 것도 해당 사유에 포함되며 눈치 주지 마시고 선블락을 하시길 바랍니다 정말 피곤하고 매번 겨냥하시는 거 지겹습니다 호응 안 해 주셔도 되니까 관련 얘기 적당히 하세요</p>
-        <p>괜히 저랑 기싸움 하겠다고 상호 팔로우 되어있는 계정에서 저를 특정한 허공 저격 트윗 작성이나 성향글에 제 행동과 유사한 사항 지뢰사항에 기입하면서 시녀딸 받지 마시고 디엠 주세요</p>
-      </div>
-    </section>
-
-  </div>
+:root{--bg:#fff;--bar:#fff;--fg:#111;--line:#d0d0d0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Pretendard','Pretendard Variable','Apple SD Gothic Neo','Noto Sans KR',sans-serif}
+#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bar);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:13px}
+#bar .g{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+button{font:inherit;padding:6px 10px;border:1px solid var(--line);background:var(--bar);color:var(--fg);border-radius:6px;cursor:pointer}
+button.on{background:#111;color:#fff}
+label{display:flex;align-items:center;gap:5px}
+input[type=range]{width:90px}
+#wrap{padding:40px 12px 80px;overflow-x:auto}
+.card{--ls:-0.02em;--lh:1.4;--w:340px;margin:0 auto;width:var(--w);max-width:100%;background:#fff;color:#000;border:1px solid #000;letter-spacing:var(--ls);line-height:var(--lh);font-size:11px;word-break:keep-all}
+.card[hidden]{display:none}
+.card .sec{padding:12px 15px;border-top:1px solid #000}
+.card .sec:first-child{border-top:0}
+.card .head{padding:14px 15px 10px}
+.card h1{margin:0 0 3px;font-size:18px;line-height:1.2;font-weight:800;letter-spacing:-0.04em}
+.card .meta{font-size:8px;line-height:1.2;color:#666}
+.card p{margin:0 0 8px}.card p:last-child{margin-bottom:0}
+.card a{color:inherit;text-decoration:underline}
+.card .meta a{color:#666}
+.card [data-go]{cursor:pointer}
+.edit [contenteditable]{outline:none}
+.edit .card{box-shadow:0 0 0 3px rgba(80,140,255,.35)}
+.hint{text-align:center;font-size:12px;opacity:.6;margin-top:14px}
+</style></head><body>
+<div id="wrap">
+<div class="card" id="c1" style="--ls: -0.08em; --lh: 1.3;">
+ <div class="head ed"><h1>unlessfarewell</h1>
+  <div class="meta">dream account: @<a href="https://x.com/siderealune?s=11">siderealune</a><br>main account: @ruinsez</div></div>
+ <div class="sec ed">
+  <p><b>成人</b> / 비주기성 프로젝트 계정<br>불호 발언 및 일상, 과격한 언사 多</p>
+  <p><span style="font-weight: 700; background-color: rgb(221, 221, 221);">이예현</span>, 최윤 (only) <span style="color:#8c8c8c">⋯→ 극 온리 성향, 해당 계정 내 배려 불필요</span><br>↳ 제 쪽은 편의상 배려합니다 자연 발생의 경우 친분 낮은 쪽 재고<br><span style="color:#8c8c8c"><b>기타 언급 캐릭터:</b>&nbsp;차주한, 아드리안 아스카니엔</span></p>
+  <p><b>개인 봇 언급 O</b> 외 억빠 발언, 가치코이성 트윗<br><u>블랙배저 관련 모든 스포일러 쿠션 X</u></p>
+  <p><b>얼마나 사랑하는건지 감이 안 올 정도로 정실 발언 많습니다…</b> 호응: thx<br>타인에게서 나오는 상기 캐릭터 내려치기 및 왜곡된 캐릭터 해석 극 거부<br>홍대병 3기 환자라 장르 수시로 바뀝니다 <span data-go="2">클릭 시 자세한 페이지</span></p>
+  <p style="color:#8c8c8c">계옮 등 중요사항 아니면 사적으로 디엠 보내지 마세요 피곤합니다</p></div>
+ <div class="sec ed">
+  <p>그 외 사항:<br>이외에도 다양한 장르 <span style="color:#8c8c8c">(변호됨 오버워치⋯)</span> 언급하나 동 장르 여부 신경 X<br>대부분 흐린눈 하다가 이상의 수용이 불가할 것 같은 경우 불시에 정리해요<br><b>불특정 다수에게 노출될 만한 연락망으로 제 개인정보 발설하지 마세요</b></p></div>
+</div>
+<div class="card" id="c2" style="--ls: -0.08em; --lh: 1.3;" hidden="">
+ <div class="head ed"><h1>unlessfarewell</h1><h1><div class="meta" style="font-weight: 400; letter-spacing: -0.88px;">dream account: @<a href="https://x.com/siderealune?s=11">siderealune</a><br>main account:&nbsp;@ruinsez</div></h1></div>
+ <div class="sec ed">
+  <p>①&nbsp;<span style="letter-spacing: -0.88px;">블랙배저&nbsp;</span><b style="letter-spacing: -0.88px;">이예현</b></p><p><span style="letter-spacing: -0.88px;">제가 영원히 예뻐합니다 행동이나 선택에 무조건적인 지향하며 이예현 관련 모든 부정적인 발언 친분 무관 블락합니다 캐릭터 서사 내&nbsp;</span><u style="letter-spacing: -0.88px;">학대 및 방임</u><span style="letter-spacing: -0.88px;">&nbsp;등의 트리거 소재 존재하므로 불편할 경우 미리 뮤트하시길 바랍니다 2차 CP 거부해요</span></p>
+  <p>② 블랙배저 <span style="font-weight: 700;">최윤</span><br><span style="letter-spacing: -0.88px;">(현) EX.&nbsp;</span><span style="letter-spacing: -0.88px; color: rgb(140, 140, 140);">윤리성 어긋난 행동을 해도 사랑합니다</span><span style="letter-spacing: -0.88px;">&nbsp;요즘은 전 여자친구 롤 열심히 말고 있습니다 타인에게서부터 이루어지는 최윤 소시오패스 중점 해석에 극 불호 성향 지니고 있으며&nbsp;마찬가지로&nbsp;</span><b style="letter-spacing: -0.88px;">2차 CP 못 봅니다</b><span style="letter-spacing: -0.88px;">&nbsp;유입하지 마세요</span><br></p>
+  <p>: 그래서 남자친구가 누구죠?<br>└ “둘 다”</p>
+  <p>동 장르 여부 상관하지 않으나 두 캐릭터를 잡는 일이 부디 없으시길 바랍니다<br><span style="color:#8c8c8c">이외 차주한 드림 존재하나 현재 CBC 성향이고</span> <b>강차 및 윤예 유입 하지 마세요</b></p></div>
+ <div class="sec ed">
+  <p>자연 발생 시:<br><b style="background:#ddd">제 쪽 팔로우 재고 부탁드립니다</b> 본인이 후발 주자 블락하고 저랑 지내고 싶으시면 그렇게 하셔도 되는데 웬만해서는 전자를 추천드립니다 <span style="color:#8c8c8c">(저는 다른 인연을 끊고 함께 지낼 정도의 좋은 사람이 아닙니다)</span></p></div>
 </div>
 
-<script>
-  // 영어·숫자 구간만 .en 으로 감싸서 자간 -0.5px 적용
-  (function(){
-    const re = /[A-Za-z0-9@]+(?: [A-Za-z0-9@]+)*/g;
-    const w = document.createTreeWalker(document.querySelector('.card'), NodeFilter.SHOW_TEXT);
-    const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
-    nodes.forEach(n => {
-      const t = n.nodeValue; if (!re.test(t)) return; re.lastIndex = 0;
-      const f = document.createDocumentFragment(); let last = 0, m;
-      while ((m = re.exec(t))) {
-        if (m.index > last) f.append(t.slice(last, m.index));
-        const sp = document.createElement('span'); sp.className = 'en'; sp.textContent = m[0]; f.append(sp);
-        last = m.index + m[0].length;
-      }
-      if (last < t.length) f.append(t.slice(last));
-      n.replaceWith(f);
-    });
-  })();
-</script>
-<script>
-  const pages = {p1: document.getElementById('p1'), p2: document.getElementById('p2')};
-  function show(id){
-    Object.values(pages).forEach(p => p.classList.remove('on'));
-    pages[id].classList.add('on');
-    history.replaceState(null, '', id === 'p2' ? '#2' : location.pathname);
-    window.scrollTo(0, 0);
-  }
-  document.querySelectorAll('[data-go]').forEach(b =>
-    b.addEventListener('click', () => show(b.dataset.go)));
-  if (location.hash === '#2') show('p2');
-
-  const cBtn = document.getElementById('cBtn');
-  const cBox = document.getElementById('cBox');
-  cBtn.addEventListener('click', () => {
-    const open = cBox.classList.toggle('on');
-    cBtn.setAttribute('aria-expanded', open);
-  });
-</script>
-
-<!-- SoundCloud BGM (숨김 플레이어) : 아무 곳이나 처음 클릭하면 재생 -->
-<iframe id="scBgm" allow="autoplay"
-  style="position:fixed;left:0;bottom:0;width:2px;height:2px;opacity:0.01;pointer-events:none;border:0"></iframe>
-<script src="https://w.soundcloud.com/player/api.js"></script>
-<script>
-  // ▼▼▼ 여기에 사운드클라우드 곡 주소를 넣으세요 (soundcloud.com/아티스트/곡 형태의 전체 주소 권장) ▼▼▼
-  const TRACK_URL = "https://soundcloud.com/n5mbofby2qn0/2132a1";
-  // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-
-  const frame = document.getElementById('scBgm');
-  frame.src = 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(TRACK_URL) +
-              '&auto_play=false&hide_related=true&show_comments=false&show_user=false&visual=false';
-
-  const sc = SC.Widget(frame);
-  let ready = false, wantPlay = false, playing = false;
-
-  sc.bind(SC.Widget.Events.READY, () => {
-    ready = true;
-    if (wantPlay) sc.play();          // 클릭이 먼저였으면 준비되자마자 재생
-  });
-  sc.bind(SC.Widget.Events.PLAY,   () => { playing = true; });
-  sc.bind(SC.Widget.Events.ERROR,  e => console.warn('SoundCloud 오류: 곡 주소를 확인하세요', e));
-  sc.bind(SC.Widget.Events.FINISH, () => { sc.seekTo(0); sc.play(); });   // 끝나면 반복
-
-  // 클릭/터치할 때마다 (재생 중이 아니면) 재생 시도 → 첫 클릭이 막혀도 다음 클릭에서 재시도
-  ['click','touchend'].forEach(ev =>
-    document.addEventListener(ev, () => {
-      if (playing) return;
-      wantPlay = true;
-      if (ready) sc.play();
-    }, {passive:true}));
-</script>
-</body>
-</html>
+</div>
+<script>document.addEventListener('click',function(e){var g=e.target.closest('[data-go]'),a=e.target.closest('a[href]');if(g){document.querySelectorAll('.card').forEach(function(c){c.hidden=c.id!='c'+g.dataset.go});scrollTo(0,0)}else if(a){e.preventDefault();window.open(a.href,'_blank','noopener')}});</script></body></html>
