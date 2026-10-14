@@ -2,30 +2,22 @@
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
-:root{--bg:#fff;--bar:#fff;--fg:#111;--line:#d0d0d0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#fff;--fg:#111;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:'Pretendard','Pretendard Variable','Apple SD Gothic Neo','Noto Sans KR',sans-serif}
-#bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bar);border-bottom:1px solid var(--line);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:13px}
-#bar .g{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
-button{font:inherit;padding:6px 10px;border:1px solid var(--line);background:var(--bar);color:var(--fg);border-radius:6px;cursor:pointer}
-button.on{background:#111;color:#fff}
-label{display:flex;align-items:center;gap:5px}
-input[type=range]{width:90px}
-#wrap{padding:40px 12px 80px;overflow-x:auto}
+html,body{height:100%}
+body{margin:0;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--bg);color:var(--fg);font-family:'Pretendard','Pretendard Variable','Apple SD Gothic Neo','Noto Sans KR',sans-serif}
+#wrap{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 12px;overflow-x:auto}
 .card{--ls:-0.02em;--lh:1.4;--w:340px;margin:0 auto;width:var(--w);max-width:100%;background:#fff;color:#000;border:1px solid #000;letter-spacing:var(--ls);line-height:var(--lh);font-size:11px;word-break:keep-all}
 .card[hidden]{display:none}
 .card .sec{padding:12px 15px;border-top:1px solid #000}
 .card .sec:first-child{border-top:0}
 .card .head{padding:14px 15px 10px}
-.card h1{margin:0 0 3px;font-size:18px;line-height:1.2;font-weight:800;letter-spacing:-0.04em}
+.card h1{margin:0 0 3px;font-size:18px;line-height:1.2;font-weight:700;letter-spacing:-0.04em}
 .card .meta{font-size:8px;line-height:1.2;color:#666}
 .card p{margin:0 0 8px}.card p:last-child{margin-bottom:0}
 .card a{color:inherit;text-decoration:underline}
 .card .meta a{color:#666}
 .card [data-go]{cursor:pointer}
-.edit [contenteditable]{outline:none}
-.edit .card{box-shadow:0 0 0 3px rgba(80,140,255,.35)}
-.hint{text-align:center;font-size:12px;opacity:.6;margin-top:14px}
 </style></head><body>
 <div id="wrap">
 <div class="card" id="c1" style="--ls: -0.08em; --lh: 1.3;">
@@ -40,16 +32,16 @@ input[type=range]{width:90px}
  <div class="sec ed">
   <p>그 외 사항:<br>이외에도 다양한 장르 <span style="color:#8c8c8c">(변호됨 오버워치⋯)</span> 언급하나 동 장르 여부 신경 X<br>대부분 흐린눈 하다가 이상의 수용이 불가할 것 같은 경우 불시에 정리해요<br><b>불특정 다수에게 노출될 만한 연락망으로 제 개인정보 발설하지 마세요</b></p></div>
 </div>
-<div class="card" id="c2" style="--ls: -0.08em; --lh: 1.3;" hidden="">
- <div class="head ed"><h1>unlessfarewell</h1><h1><div class="meta" style="font-weight: 400; letter-spacing: -0.88px;">dream account: @<a href="https://x.com/siderealune?s=11">siderealune</a><br>main account:&nbsp;@ruinsez</div></h1></div>
+<div class="card" id="c2" style="--ls: -0.08em; --lh: 1.3;" hidden>
+ <div class="head ed"><h1>unlessfarewell</h1>
+  <div class="meta">dream account: @<a href="https://x.com/siderealune?s=11">siderealune</a><br>main account: @ruinsez</div></div>
  <div class="sec ed">
-  <p>①&nbsp;<span style="letter-spacing: -0.88px;">블랙배저&nbsp;</span><b style="letter-spacing: -0.88px;">이예현</b></p><p><span style="letter-spacing: -0.88px;">제가 영원히 예뻐합니다 행동이나 선택에 무조건적인 지향하며 이예현 관련 모든 부정적인 발언 친분 무관 블락합니다 캐릭터 서사 내&nbsp;</span><u style="letter-spacing: -0.88px;">학대 및 방임</u><span style="letter-spacing: -0.88px;">&nbsp;등의 트리거 소재 존재하므로 불편할 경우 미리 뮤트하시길 바랍니다 2차 CP 거부해요</span></p>
-  <p>② 블랙배저 <span style="font-weight: 700;">최윤</span><br><span style="letter-spacing: -0.88px;">(현) EX.&nbsp;</span><span style="letter-spacing: -0.88px; color: rgb(140, 140, 140);">윤리성 어긋난 행동을 해도 사랑합니다</span><span style="letter-spacing: -0.88px;">&nbsp;요즘은 전 여자친구 롤 열심히 말고 있습니다 타인에게서부터 이루어지는 최윤 소시오패스 중점 해석에 극 불호 성향 지니고 있으며&nbsp;마찬가지로&nbsp;</span><b style="letter-spacing: -0.88px;">2차 CP 못 봅니다</b><span style="letter-spacing: -0.88px;">&nbsp;유입하지 마세요</span><br></p>
+  <p>① 블랙배저 <b>이예현</b></p><p>제가 영원히 예뻐합니다 행동이나 선택에 무조건적인 지향하며 이예현 관련 모든 부정적인 발언 친분 무관 블락합니다 캐릭터 서사 내 <u>학대 및 방임</u> 등의 트리거 소재 존재하므로 불편할 경우 미리 뮤트하시길 바랍니다 2차 CP 거부해요</p>
+  <p>② 블랙배저 <b>최윤</b><br>(현) EX. <span style="color:#8c8c8c">윤리성 어긋난 행동을 해도 사랑합니다</span> 요즘은 전 여자친구 롤 열심히 말고 있습니다 타인에게서부터 이루어지는 최윤 소시오패스 중점 해석에 극 불호 성향 지니고 있으며 마찬가지로 <b>2차 CP 못 봅니다</b> 유입하지 마세요</p>
   <p>: 그래서 남자친구가 누구죠?<br>└ “둘 다”</p>
   <p>동 장르 여부 상관하지 않으나 두 캐릭터를 잡는 일이 부디 없으시길 바랍니다<br><span style="color:#8c8c8c">이외 차주한 드림 존재하나 현재 CBC 성향이고</span> <b>강차 및 윤예 유입 하지 마세요</b></p></div>
  <div class="sec ed">
   <p>자연 발생 시:<br><b style="background:#ddd">제 쪽 팔로우 재고 부탁드립니다</b> 본인이 후발 주자 블락하고 저랑 지내고 싶으시면 그렇게 하셔도 되는데 웬만해서는 전자를 추천드립니다 <span style="color:#8c8c8c">(저는 다른 인연을 끊고 함께 지낼 정도의 좋은 사람이 아닙니다)</span></p></div>
 </div>
-
 </div>
 <script>document.addEventListener('click',function(e){var g=e.target.closest('[data-go]'),a=e.target.closest('a[href]');if(g){document.querySelectorAll('.card').forEach(function(c){c.hidden=c.id!='c'+g.dataset.go});scrollTo(0,0)}else if(a){e.preventDefault();window.open(a.href,'_blank','noopener')}});</script></body></html>
