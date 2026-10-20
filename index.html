@@ -1,47 +1,350 @@
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>성향글</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <style>
-:root{--bg:#fff;--fg:#111;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--bg);color:var(--fg);font-family:'Pretendard','Pretendard Variable','Apple SD Gothic Neo','Noto Sans KR',sans-serif}
-#wrap{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 12px;overflow-x:auto}
-.card{--ls:-0.02em;--lh:1.4;--w:340px;margin:0 auto;width:var(--w);max-width:100%;background:#fff;color:#000;border:1px solid #000;letter-spacing:var(--ls);line-height:var(--lh);font-size:11px;word-break:keep-all}
-.card[hidden]{display:none}
-.card .sec{padding:12px 15px;border-top:1px solid #000}
-.card .sec:first-child{border-top:0}
-.card .head{padding:14px 15px 10px}
-.card h1{margin:0 0 3px;font-size:18px;line-height:1.2;font-weight:700;letter-spacing:-0.04em}
-.card .meta{font-size:8px;line-height:1.2;color:#666}
-.card p{margin:0 0 8px}.card p:last-child{margin-bottom:0}
-.card a{color:inherit;text-decoration:underline}
-.card .meta a{color:#666}
-.card [data-go]{cursor:pointer}
-</style></head><body>
-<div id="wrap">
-<div class="card" id="c1" style="--ls: -0.08em; --lh: 1.3;">
- <div class="head ed"><h1>unlessfarewell</h1>
-  <div class="meta">dream account: @<a href="https://x.com/siderealune?s=11">siderealune</a><br>main account: @ruinsez</div></div>
- <div class="sec ed">
-  <p><b>成人</b> / 비주기성 프로젝트 계정<br>불호 발언 및 일상, 과격한 언사 多</p>
-  <p><span style="font-weight: 700; background-color: rgb(221, 221, 221);">이예현</span>, 최윤 (only) <span style="color:#8c8c8c">⋯→ 극 온리 성향, 해당 계정 내 배려 불필요</span><br>↳ 제 쪽은 편의상 배려합니다 자연 발생의 경우 친분 낮은 쪽 재고<br><span style="color:#8c8c8c"><b>기타 언급 캐릭터:</b>&nbsp;차주한, 아드리안 아스카니엔</span></p>
-  <p><b>개인 봇 언급 O</b> 외 억빠 발언, 가치코이성 트윗<br><u>블랙배저 관련 모든 스포일러 쿠션 X</u></p>
-  <p><b>얼마나 사랑하는건지 감이 안 올 정도로 정실 발언 많습니다…</b> 호응: thx<br>타인에게서 나오는 상기 캐릭터 내려치기 및 왜곡된 캐릭터 해석 극 거부<br>홍대병 3기 환자라 장르 수시로 바뀝니다 <span data-go="2">클릭 시 자세한 페이지</span></p>
-  <p style="color:#8c8c8c">계옮 등 중요사항 아니면 사적으로 디엠 보내지 마세요 피곤합니다</p></div>
- <div class="sec ed">
-  <p>그 외 사항:<br>이외에도 다양한 장르 <span style="color:#8c8c8c">(변호됨 오버워치⋯)</span> 언급하나 동 장르 여부 신경 X<br>대부분 흐린눈 하다가 이상의 수용이 불가할 것 같은 경우 불시에 정리해요<br><b>불특정 다수에게 노출될 만한 연락망으로 제 개인정보 발설하지 마세요</b></p></div>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%;background:#fff;color:#111;overflow:hidden}
+  body{
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+    letter-spacing:-0.6px;
+    line-height:1.35;
+  }
+
+  /* ---------- pages ---------- */
+  .page{
+    position:fixed;inset:0;background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .6s ease, visibility .6s ease;
+  }
+  .page.hide{opacity:0;visibility:hidden;pointer-events:none}
+
+  /* ---------- page 1 ---------- */
+  #page1 .wrap{text-align:center}
+  #photo{
+    display:block;width:min(320px,82vw);
+    border:0;background:transparent;cursor:pointer;margin:0 auto;
+  }
+  /* 사진 비율 그대로 (잘리지 않음). 너비는 위 width 값으로 조절 (예: min(320px,82vw) → 숫자 키우면 더 커짐) */
+  #photo img{width:100%;height:auto;max-height:80vh;object-fit:contain;display:block}
+  #photo img[src=""]{display:none}
+  #page1 .click{margin-top:10px;font-size:9.5px;letter-spacing:-0.6px;line-height:1.35}
+
+  /* ---------- page 2 (모바일/PC 동일한 고정 크기) ---------- */
+  /* location ↔ 별자리 간격: frame 높이와 #stage top을 같이 늘렸습니다 (아래 숫자만 바꾸면 조절 가능) */
+  #frame{position:relative;width:340px;height:450px}
+  /* location: 화면(뷰포트) 모서리에 고정 → 별자리와 떨어짐. 위치는 아래 값만 바꾸면 됩니다 */
+  /* location: 별자리 프레임 기준 우측 상단 (폰/PC 모두 별자리와의 거리가 같게) */
+  #loc{position:absolute;top:-34px;right:12px;font-size:8.5px;line-height:1.4;letter-spacing:-0.6px;text-align:right}
+  @media (min-width:600px){ #loc{top:-60px;right:-40px} }
+  /* 별자리: 프레임 정중앙 + 이전보다 크게 (290x420) */
+  #stage{position:absolute;left:13.5px;top:19.5px;width:290px;height:420px}
+  #stage svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+  .line{stroke:#111;stroke-width:0.8px;fill:none;vector-effect:non-scaling-stroke}
+  .star{cursor:pointer;outline:none}
+  .lbl{position:absolute;font-size:9px;letter-spacing:-0.6px;line-height:1.35;white-space:nowrap;color:#111}
+  /* 망각은 축복이었을 텐데: 기울임 + 작게 + 원에서 더 멀리 */
+  .lbl.fg{font-size:7.5px;font-style:italic;letter-spacing:-0.4px;left:0;top:0}
+  .lbl.sat{font-size:7.5px;letter-spacing:-0.4px;line-height:1.4}
+
+  /* ---------- popup ---------- */
+  #overlay{
+    position:fixed;inset:0;z-index:50;
+    background:rgba(0,0,0,.22);
+    display:flex;align-items:center;justify-content:center;
+    padding:16px;
+    opacity:0;visibility:hidden;
+    transition:opacity .4s ease, visibility .4s ease;
+    cursor:pointer;
+  }
+  #overlay.on{opacity:1;visibility:visible}
+  .card{
+    display:none;
+    width:300px;max-width:100%;max-height:84vh;max-height:84dvh;overflow:auto;
+    background:#fff;border-radius:20px;
+    padding:16px 15px 18px;
+    box-shadow:0 3px 12px rgba(0,0,0,.10);
+    font-size:9px;letter-spacing:-0.6px;line-height:1.35;
+  }
+  .card.show{display:block}
+
+  .meta{display:flex;margin-bottom:11px;font-size:9px}
+  .meta span:first-child{flex:0 0 46%}
+  .meta span:last-child{flex:1}
+
+  /* 검은 배경 = 형광펜처럼 얇게 */
+  .tag{display:inline;background:#111;color:#fff;padding:.3px 3px;font-size:9.5px;line-height:1.35;
+       -webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .tag.sm{font-size:9px;padding:.3px 3px}
+  .id-row{font-size:9px;margin-bottom:10px}
+  .id-row .row2{margin-top:3px}
+  .label{font-size:7.5px;color:#999;letter-spacing:1px;margin-bottom:2px;font-weight:500}
+  .block{margin-bottom:9px}
+  .block p{font-size:9px}
+  hr{border:0;border-top:1px solid #111;margin:11px 0 12px}
+  .para{font-size:9px;margin-bottom:9px}
+  .para .n{font-size:8px;margin-right:2px}
+  .notice-bar{display:inline;background:#111;color:#fff;padding:.3px 3px;font-size:9px;line-height:1.7;
+              -webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .notice-wrap{margin:0 0 10px}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+  .two p{font-size:9px;line-height:1.5}
+
+  .marked-sq{display:inline-block;width:8px;height:8px;background:#111;vertical-align:-1px;margin-left:5px}
+
+  .grp{margin-bottom:9px}
+  .grp .h{font-weight:700;font-size:10px;margin-bottom:4px}
+  .grp .h small{font-weight:400;font-size:8px;color:#999;margin-left:4px}
+  .ln{font-size:9px;line-height:1.5;margin-bottom:6px}
+  .ln b{font-weight:700}
+  .ln small{font-size:8px;color:#999}
+  .mk{background:#111;color:#fff;padding:.3px 3px}
+  .pills{display:flex;flex-wrap:wrap;gap:3px 9px}
+  .pill{font-size:9px;line-height:1.35}
+  .pill.on{background:#111;color:#fff;padding:.3px 3px;margin:0 -3px}
+.card{width:300px}
+.meta,.id-row,.para,.ln,.two p{font-size:9px}
+.tag{font-size:inherit;padding:0.3px 3px}
+.g{font-size:8px;color:#999}
+.ln b,.id-row b{font-weight:700}
+.card>:last-child{margin-bottom:0}
+/*ed*/.cb{display:inline-block;width:8px;height:8px;border:1px solid #111;vertical-align:-1px;margin-right:3px}.cb.on{background:#111}.bx{border:1px solid #111;padding:0 3px}details.fold summary{cursor:pointer;font-weight:700;list-style:none}details.fold summary::-webkit-details-marker{display:none}details.fold summary::before{content:"▸ "}details.fold[open] summary::before{content:"▾ "}details.fold>div{margin-top:4px}
+</style>
+</head>
+<body>
+
+<!-- ================= PAGE 1 ================= -->
+<section class="page" id="page1">
+  <div class="wrap">
+    <a id="photo" href="#page2"><img id="photoImg" src="" alt=""></a>
+    <div class="click">( click )</div>
+  </div>
+</section>
+
+<!-- ================= PAGE 2 ================= -->
+<section class="page hide" id="page2">
+  <div id="frame">
+    <div id="loc">
+      <b>location</b><br>
+      centercore<br>
+      α CMa · RA 06h 45m 08.9s<br>
+      Dec −16° 42′ 58″
+    </div>
+
+    <!-- location 과 상하좌우 반대 위치 (왼쪽 아래) -->
+    <div class="lbl fg">망각은 축복이었을 텐데</div>
+
+    <div id="stage">
+      <svg viewBox="0 0 1596 2310" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- 선 -->
+        <line class="line" x1="378" y1="711" x2="1201" y2="355"/>
+        <line class="line" x1="357" y1="827" x2="1230" y2="1256"/>
+        <line class="line" x1="1260" y1="1380" x2="856" y2="1922"/>
+
+        <!-- 별 1 (큼) -->
+        <g class="star" data-card="0" data-cx="1330" data-cy="300" data-r="105" data-size="200" tabindex="0" role="button" aria-label="about No.1">
+          <path class="shape" fill="#111"/>
+          <circle cx="1330" cy="300" r="110" fill="transparent"/>
+        </g>
+
+        <!-- 별 2 (중간) -->
+        <g class="star" data-card="1" data-cx="240" data-cy="770" data-r="60" data-size="120" tabindex="0" role="button" aria-label="about No.2">
+          <path class="shape" fill="#111"/>
+          <circle cx="240" cy="770" r="90" fill="transparent"/>
+        </g>
+
+        <!-- 별 3 (작음) -->
+        <g class="star" data-card="2" data-cx="1320" data-cy="1300" data-r="38" data-size="80" tabindex="0" role="button" aria-label="about No.3">
+          <path class="shape" fill="#111"/>
+          <circle cx="1320" cy="1300" r="80" fill="transparent"/>
+        </g>
+
+        <!-- 뚫린 원 -->
+        <g class="star" data-card="3" data-cx="820" data-cy="1970" data-size="56" tabindex="0" role="button" aria-label="about No.4">
+          <circle class="shape" cx="820" cy="1970" r="15" fill="none" stroke="#111" stroke-width="5"/>
+          <circle cx="820" cy="1970" r="80" fill="transparent"/>
+        </g>
+      </svg>
+
+      <div class="lbl" style="left:70%;top:19.5%">SIRIUS<br>α CMa N1642'</div>
+      <div class="lbl sat" style="left:8%;top:41.5%">NORAD 43013<br>COSPAR 2017-073A</div>
+      <div class="lbl sat" style="right:0;top:63%;text-align:right">NORAD 28654<br>COSPAR 2005-018A</div>
+      <div class="lbl sat" style="left:58%;top:84.5%">NORAD 41240<br>COSPAR 2016-040A</div>
+      <!-- top 값을 키우면 원에서 더 멀어지고, 줄이면 가까워집니다 -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= POPUPS ================= -->
+<div id="overlay" aria-live="polite">
+
+<article class="card" id="card0">
+<div class="meta"></div><span style="letter-spacing: -0.8px;"><span style="letter-spacing: -1px;"><span style="letter-spacing: -0.8px;"><div class="meta">( <i>@unlessfarewell</i>&nbsp;)</div>
+  <div class="id-row"><span class="tag">Eternity</span> · 20⁺</div>
+  <div class="id-row">ㄴ ♥  블랙배저 · <b>이예현 </b><span class="g">기타 동장르 최윤</span></div>
+  <div class="label"><span style="line-height: 1.3;"><span style="letter-spacing: 0.8px;"><span style="letter-spacing: 0.6px;"><span style="letter-spacing: 0.4px;"><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0px;"><span style="letter-spacing: -0.2px;"><span style="letter-spacing: -0.4px;"><span style="letter-spacing: -0.6px;">ACCOUNTS</span></span></span></span></span></span></span></span></span></div>
+  <p class="ln" style="font-size: 9px;">main acc (@ruinsez)</p><p class="ln"><b>제 개인정보와 관련된 어떠한 내용도 제3자가 볼 수 있는 곳에 올리지 마세요⋯</b>&nbsp;해당 성향글 또한 외부로 유출 X 정독하고 성향이 어긋날 경우 FF 정리 반드시 하세요</p><details class="fold" style="font-size: 9px;"><summary>more...</summary><div>1) 비주기성 프로텍트 계정으로 불호 발언 및 일상 누수, 과격한 언행이 트윗의 주를 차지합니다 <b>기존 외 미성년자와의 연결 지양</b></div><div>(2) 모든 계정을 통틀어 접속률이 가장 높으므로 제가 봐야할 것이나 메인 드림 변경, 계정 이동 등의 사안은 해당 계정 다이렉트 메시지로 언급 바랍니다 최근 들어 일정이 난해한 탓에 알림에 혼돈이 크게 옵니다 따라 <b>사적 용도로 사용 X 디엠 삭제합니다</b></div><div>(3) 작성하는 모든 트윗은 별도의 필터를 경유하지 않습니다 편하게 쓰고자 생성한 계정일 뿐더러 세심한 성정이 아니라 필요에 따라 맞팔로우 뮤트 자유롭게 합니다 (나중에 풉니다⋯) 이에 악의 일절 없으며 관련해서 타임라인 저격 적당히 하세요⋯&nbsp;</div></details></span></span></span><details class="fold" style="font-size: 9px;"><div></div></details>
+  
+</article>
+
+<article class="card" id="card1">
+<div class="meta"><span></span></div><span style="font-size: 9.5px;"><span style="font-size: 10px;"><span style="font-size: 9.5px;"><span style="font-size: 9px;"><div class="meta"><span>( <i>caution</i> )</span></div>
+  <div class="id-row"><span class="tag">NG</span></div>
+  <div class="two"><div><div class="label"><span style="line-height: 1.3;"><span style="letter-spacing: 0.8px;"><span style="letter-spacing: 0.6px;"><span style="letter-spacing: 0.4px;"><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0px;"><span style="letter-spacing: -0.2px;"><span style="letter-spacing: -0.4px;"><span style="letter-spacing: -0.6px;"><span style="letter-spacing: -0.4px;">Default</span></span></span></span></span></span></span></span></span></span></div><p class="ln">ㄴ 이예현 관련 모든 동인 커플링</p><p class="ln">ㄴ <b>강차, 윤예, 뤀얀 </b>(위치 및 상대 무관)</p></div><div><div class="label"><span style="letter-spacing: 0.8px;"><span style="letter-spacing: 0.6px;"><span style="letter-spacing: 0.4px;"><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0px;"><span style="letter-spacing: -0.2px;"><span style="letter-spacing: -0.4px;"><span style="letter-spacing: -0.6px;">ETC.</span></span></span></span></span></span></span></span></div><p class="ln">ㄴ 사찰 및 영향 받는 모든 행위</p><p class="ln">ㄴ 친분 과시</p></div></div></span></span></span></span><hr><span style="font-size: 9.5px;"><span style="font-size: 10px;"><span style="font-size: 9.5px;"><span style="font-size: 9px;"><span style="font-size: 9.5px;"><span style="font-size: 7.5px;"><span style="font-size: 8px;"><span style="font-size: 8.5px;"><span style="font-size: 9px;"><span style="font-size: 9.5px;"><span style="font-size: 10px;"><span style="font-size: 10.5px;"><span style="font-size: 8.5px;"><span style="font-size: 9px;"><span style="line-height: 1.3;"><span style="line-height: 1.25;"><span style="line-height: 1.3;"><p class="para" style="font-size: 9.5px; line-height: 1.3;"><span style="font-size: 9px; letter-spacing: -0.8px;">(1) 블랙배저 온리 NL 성향으로 공식 제외 <b>모든 종류의 2차 동인 소비 거부</b>하며 어떠한 방향으로든 유입하지 마세요 이를 방지하기 위해 연성에 태그는 자제해 주셨으면 합니다⋯ 특히나 이예현의 경우 다른 캐릭터와의 로맨스 요소 소량이라도 존재할 경우 해당 연성 및 뉘앙스 트윗 유입은 친분 무관 블락합니다</span></p><p class="para" style="font-size: 9.5px; line-height: 1.3;"><span style="font-size: 9px; letter-spacing: -0.8px;">(2) 단순 호감 발언을 차치하고 작품 완독 여부와 관계없이 타인에게로부터 발화되는 <b>애정 담긴</b> 이예현 이야기에 면역이 없습니다 예민하다 싶으면 알아서 연결 재고</span></p><p class="para" style="font-size: 9.5px; line-height: 1.3;"><span style="font-size: 9px; letter-spacing: -0.8px;">(3) <b>제게서 어떠한 영향도 받지 마시고 제 문체 및 성향글 내용 베껴서 본인 거인 것처럼 구사하지 마세요⋯</b> 판단 하에 친분 무관 FF 정리하며 인간관계에 쉽게 피로해지는 타입이라&nbsp;</span><span style="letter-spacing: -0.8px; font-size: 9px;">관련 컨택 일절 받지 않습니다 2차 지인 통해서 연락 하지도 마세요</span></p><p class="para" style="font-size: 9.5px; line-height: 1.3;"><span style="letter-spacing: -0.8px; font-size: 9px;">(4) 캐릭터 해석에 있어 상당히 예민하며&nbsp;</span><span style="letter-spacing: -0.8px; font-size: 9px;">승현 → 윤 ← 예현 (화살표 방향 무관) 형태의 커플링 극도로 싫어합니다 애정하는 이가 '예민수' 따위의 동인적 + 른 캐해 + 단편적인 캐릭터 해석을 명사화한 별명으로 불리는 걸 보고 싶지 않습니다 <span class="g">이하 타 장르 아드리안 아스카니엔 또한 근친 커플링 유입 거부하며 형동사 별명 싫어합니다 하지 마세요</span></span></p><p class="para" style="font-size: 9.5px; line-height: 1.3;"><span style="font-size: 9px; letter-spacing: -0.8px;">(5) 미리 고지하지 않은 부분에서의 잡음 싫어합니다 <span class="g"><b>계정 연결 = 성향 이해</b>로 간주</span></span><span style="letter-spacing: -0.8px; font-size: 9px;"><span class="g"><br></span></span></p></span></span></span></span></span></span></span></span></span></span></span></span></span><span style="font-size: 7.5px;"><span style="font-size: 8px;"><span style="font-size: 8.5px;"><span style="font-size: 9px;"><span style="font-size: 9.5px;"><span style="font-size: 10px;"><span style="font-size: 10.5px;"><span style="font-size: 8.5px;"><p class="para"><span style="font-size: 8px;"></span></p></span><p class="para"><span style="font-size: 8px;"></span></p></span></span></span></span></span></span></span><p class="para"><span style="font-size: 8px;"></span></p></span></span></span></span><p class="para"><span style="font-size: 8px;"></span></p>
+</article>
+
+<article class="card" id="card2">
+<div class="meta"><span>( <i>名1</i>  )</span></div>
+  <div class="id-row"><span class="tag">LIST</span> 상기 캐릭터 드림러 더 이상 받지 않으며 자연 발생 시 후발주자 FF 정리해요</div>
+  <div class="label">NOTICE</div>
+  <p class="ln"><span class="tag">배경</span> 캐릭터 발생 시 친분 무관 블락</p>
+  <hr>
+  <p class="ln"><b></b><b>블랙배저</b> · <span class="tag">리카르도 소르디</span>, <b>최윤</b><b></b></p>
+  <p class="ln"><b>마법명가 차남으로 살아남는 법 </b>· 아델베르트 호엔촐레른</p>
+  <p class="ln"><b>괴담에 떨어져도 출근을 해야 하는구나</b> · 김솔음, 최 요원</p>
+  <p class="ln"><b>망나니 PD 아이돌로 살아남기</b> · 서호윤</p>
+  <p class="ln"><b>어린 신인데 키워주시죠</b> · 한고요</p>
+  <p class="ln"><b>あんさんぶるスターズ！！</b>· 氷鷹 北斗</p>
+  <p class="ln"><b>プロセカ</b> · 暁山 瑞希</p>
+</article>
+
+<article class="card" id="card3">
+<div class="meta"><span>( <i>fyi</i>  )</span></div>
+  <div class="id-row">좋아하는 것에 에너지를 쏟는 편이라 타임라인을 정독하기 어렵습니다 계옮이나 메인 드림 변경 시에는 직멘이나 디엠 필시적으로 부탁드립니다</div>
+  <div class="id-row"><b>불특정 다수에게 노출될 만한 제 개인정보 공개적인 곳에서 언급하지 마세요</b></div>
+</article>
 </div>
-<div class="card" id="c2" style="--ls: -0.08em; --lh: 1.3;" hidden>
- <div class="head ed"><h1>unlessfarewell</h1>
-  <div class="meta">dream account: @<a href="https://x.com/siderealune?s=11">siderealune</a><br>main account: @ruinsez</div></div>
- <div class="sec ed">
-  <p>① 블랙배저 <b>이예현</b></p><p>제가 영원히 예뻐합니다 행동이나 선택에 무조건적인 지향하며 이예현 관련 모든 부정적인 발언 친분 무관 블락합니다 캐릭터 서사 내 <u>학대 및 방임</u> 등의 트리거 소재 존재하므로 불편할 경우 미리 뮤트하시길 바랍니다 2차 CP 거부해요</p>
-  <p>② 블랙배저 <b>최윤</b><br>(현) EX. <span style="color:#8c8c8c">윤리성 어긋난 행동을 해도 사랑합니다</span> 요즘은 전 여자친구 롤 열심히 말고 있습니다 타인에게서부터 이루어지는 최윤 소시오패스 중점 해석에 극 불호 성향 지니고 있으며 마찬가지로 <b>2차 CP 못 봅니다</b> 유입하지 마세요</p>
-  <p>: 그래서 남자친구가 누구죠?<br>└ “둘 다”</p>
-  <p>동 장르 여부 상관하지 않으나 두 캐릭터를 잡는 일이 부디 없으시길 바랍니다<br><span style="color:#8c8c8c">이외 차주한 드림 존재하나 현재 CBC 성향이고</span> <b>강차 및 윤예 유입 하지 마세요</b></p></div>
- <div class="sec ed">
-  <p>자연 발생 시:<br><b style="background:#ddd">제 쪽 팔로우 재고 부탁드립니다</b> 본인이 후발 주자 블락하고 저랑 지내고 싶으시면 그렇게 하셔도 되는데 웬만해서는 전자를 추천드립니다 <span style="color:#8c8c8c">(저는 다른 인연을 끊고 함께 지낼 정도의 좋은 사람이 아닙니다)</span></p></div>
-</div>
-</div>
-<script>document.addEventListener('click',function(e){var g=e.target.closest('[data-go]'),a=e.target.closest('a[href]');if(g){document.querySelectorAll('.card').forEach(function(c){c.hidden=c.id!='c'+g.dataset.go});scrollTo(0,0)}else if(a){e.preventDefault();window.open(a.href,'_blank','noopener')}});</script></body></html>
+
+<script>
+  /* =====================  여기만 수정하세요  ===================== */
+
+  // 1페이지 사진 링크 (이미지 주소를 따옴표 안에 붙여 넣기)
+  const PHOTO_URL = "https://i.pinimg.com/736x/ce/e1/eb/cee1ebe7256963720c05ca698578f378.jpg";
+
+  // 사진 클릭 시 이동할 주소. 비워두면 같은 파일 안의 2페이지로 넘어갑니다.
+  const PAGE2_URL = "";
+
+  // 별 이미지 링크. 비워두면 기본 별 모양이 보입니다. 순서: 큰 별, 중간 별, 작은 별, 원
+  const STAR_URLS = ["","","",""];
+
+  // 별 이미지 크기 (숫자가 클수록 큼). 순서는 위와 같습니다.
+  const STAR_SIZES = [200, 120, 80, 56];
+
+  /* ============================================================== */
+
+  const page1 = document.getElementById('page1');
+  const page2 = document.getElementById('page2');
+  const overlay = document.getElementById('overlay');
+  const cards = [...document.querySelectorAll('.card')];
+
+  // 사진
+  const img = document.getElementById('photoImg');
+  if (PHOTO_URL) img.src = PHOTO_URL;
+
+  document.getElementById('photo').addEventListener('click', e => {
+    e.preventDefault();
+    if (PAGE2_URL) { location.href = PAGE2_URL; return; }
+    page1.classList.add('hide');
+    page2.classList.remove('hide');
+  });
+
+  // 별 이미지 교체
+  const NS = 'http://www.w3.org/2000/svg';
+  document.querySelectorAll('.star').forEach((s, i) => {
+    const url = STAR_URLS[i];
+    if (!url) return;
+    const size = STAR_SIZES[i] || +s.dataset.size;
+    const cx = +s.dataset.cx, cy = +s.dataset.cy;
+    s.querySelector('.shape').style.display = 'none';
+    const im = document.createElementNS(NS, 'image');
+    im.setAttribute('href', url);
+    im.setAttribute('x', cx - size / 2);
+    im.setAttribute('y', cy - size / 2);
+    im.setAttribute('width', size);
+    im.setAttribute('height', size);
+    im.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    s.insertBefore(im, s.firstChild);
+  });
+
+
+  // 기본 별 모양: 가늘고 긴 4방향 + 짧은 대각선 4방향
+  function starPath(cx, cy, R) {
+    const tips = [  // [각도(deg), 길이]
+      [-90, R], [-45, R*0.30], [0, R*0.60], [45, R*0.30],
+      [90, R], [135, R*0.30], [180, R*0.60], [225, R*0.30]
+    ];
+    const w = R * 0.045; // 허리 두께
+    const pt = (a, r) => [cx + r*Math.cos(a*Math.PI/180), cy + r*Math.sin(a*Math.PI/180)];
+    let d = '';
+    tips.forEach((t, i) => {
+      const n = tips[(i+1) % tips.length];
+      const [x1, y1] = pt(t[0], t[1]);
+      const na = i === 7 ? 270 : n[0];
+      const [x2, y2] = pt(na, n[1]);
+      const mid = (t[0] + na) / 2;
+      const [qx, qy] = pt(mid, w);
+      if (i === 0) d += `M${x1.toFixed(1)} ${y1.toFixed(1)}`;
+      d += ` Q${qx.toFixed(1)} ${qy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`;
+    });
+    return d + ' Z';
+  }
+  document.querySelectorAll('.star').forEach(s => {
+    if (s.dataset.r) s.querySelector('.shape').setAttribute('d', starPath(+s.dataset.cx, +s.dataset.cy, +s.dataset.r));
+  });
+
+
+  // "망각은 축복이었을 텐데": location 과 별자리 중심 기준 점대칭(상하좌우 반대) 위치에 자동 배치
+  const frame = document.getElementById('frame');
+  const stageEl = document.getElementById('stage');
+  const locEl = document.getElementById('loc');
+  const fgEl = document.querySelector('.lbl.fg');
+  function placeFg() {
+    const f = frame.getBoundingClientRect();
+    const st = stageEl.getBoundingClientRect();
+    const l = locEl.getBoundingClientRect();
+    if (!f.width) return;
+    // 별자리 실제 중심 (viewBox 1596x2310 기준 별들이 차지하는 범위의 중앙)
+    const cx = st.left + st.width * (861 / 1596);
+    const cy = st.top + st.height * (1131 / 2310);
+    const lx = l.left + l.width / 2, ly = l.top + l.height / 2;
+    const PULL = 1; // 1 = 완전 점대칭 (location 과 같은 거리·반대 방향)
+    const tx = cx + (cx - lx) * PULL, ty = cy + (cy - ly) * PULL;
+    const w = fgEl.offsetWidth, h = fgEl.offsetHeight;
+    fgEl.style.left = (tx - w / 2 - f.left) + 'px';
+    fgEl.style.top  = (ty - h / 2 - f.top) + 'px';
+  }
+  placeFg();
+  window.addEventListener('resize', placeFg);
+  window.addEventListener('load', placeFg);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeFg);
+
+  // 팝업
+  function openCard(i) {
+    cards.forEach((c, k) => c.classList.toggle('show', k === i));
+    overlay.classList.add('on');
+    if (cards[i]) cards[i].scrollTop = 0;
+  }
+  function closeCard() {
+    overlay.classList.remove('on');
+    setTimeout(() => cards.forEach(c => c.classList.remove('show')), 400);
+  }
+
+  document.querySelectorAll('.star').forEach(s => {
+    const open = e => { e.stopPropagation(); openCard(+s.dataset.card); };
+    s.addEventListener('click', open);
+    s.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(e); }
+    });
+  });
+
+  // 화면 어디를 터치해도 팝업 닫힘
+  overlay.addEventListener('click', e => { if (e.target.closest('details')) return; closeCard(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCard(); });
+</script>
+</body>
+</html>
