@@ -28,25 +28,19 @@
     display:block;width:min(320px,82vw);
     border:0;background:transparent;cursor:pointer;margin:0 auto;
   }
-  /* 사진 비율 그대로 (잘리지 않음). 너비는 위 width 값으로 조절 (예: min(320px,82vw) → 숫자 키우면 더 커짐) */
   #photo img{width:100%;height:auto;max-height:80vh;object-fit:contain;display:block}
   #photo img[src=""]{display:none}
   #page1 .click{margin-top:10px;font-size:9.5px;letter-spacing:-0.6px;line-height:1.35}
 
-  /* ---------- page 2 (모바일/PC 동일한 고정 크기) ---------- */
-  /* location ↔ 별자리 간격: frame 높이와 #stage top을 같이 늘렸습니다 (아래 숫자만 바꾸면 조절 가능) */
+  /* ---------- page 2 ---------- */
   #frame{position:relative;width:340px;height:450px}
-  /* location: 화면(뷰포트) 모서리에 고정 → 별자리와 떨어짐. 위치는 아래 값만 바꾸면 됩니다 */
-  /* location: 별자리 프레임 기준 우측 상단 (폰/PC 모두 별자리와의 거리가 같게) */
   #loc{position:absolute;top:-34px;right:12px;font-size:8.5px;line-height:1.4;letter-spacing:-0.6px;text-align:right}
   @media (min-width:600px){ #loc{top:-60px;right:-40px} }
-  /* 별자리: 프레임 정중앙 + 이전보다 크게 (290x420) */
   #stage{position:absolute;left:13.5px;top:19.5px;width:290px;height:420px}
   #stage svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
   .line{stroke:#111;stroke-width:0.8px;fill:none;vector-effect:non-scaling-stroke}
   .star{cursor:pointer;outline:none}
   .lbl{position:absolute;font-size:9px;letter-spacing:-0.6px;line-height:1.35;white-space:nowrap;color:#111}
-  /* 망각은 축복이었을 텐데: 기울임 + 작게 + 원에서 더 멀리 */
   .lbl.fg{font-size:7.5px;font-style:italic;letter-spacing:-0.4px;left:0;top:0}
   .lbl.sat{font-size:7.5px;letter-spacing:-0.4px;line-height:1.4}
 
@@ -75,7 +69,6 @@
   .meta span:first-child{flex:0 0 46%}
   .meta span:last-child{flex:1}
 
-  /* 검은 배경 = 형광펜처럼 얇게 */
   .tag{display:inline;background:#111;color:#fff;padding:.3px 3px;font-size:9.5px;line-height:1.35;
        -webkit-box-decoration-break:clone;box-decoration-break:clone}
   .tag.sm{font-size:9px;padding:.3px 3px}
@@ -113,6 +106,15 @@
 .ln b,.id-row b{font-weight:700}
 .card>:last-child{margin-bottom:0}
 /*ed*/.cb{display:inline-block;width:8px;height:8px;border:1px solid #111;vertical-align:-1px;margin-right:3px}.cb.on{background:#111}.bx{border:1px solid #111;padding:0 3px}details.fold summary{cursor:pointer;font-weight:700;list-style:none}details.fold summary::-webkit-details-marker{display:none}details.fold summary::before{content:"▸ "}details.fold[open] summary::before{content:"▾ "}details.fold>div{margin-top:4px}
+
+/* ===== 모든 팝업 공통 규격 (1번 기준) ===== */
+.card,.card *{letter-spacing:-0.6px !important;line-height:1.35 !important}
+.card p.ln{margin:0 0 6px !important;font-size:9px}
+.card .meta{margin-bottom:11px;font-size:9px}
+.card .id-row{margin-bottom:10px}
+.card hr{margin:11px 0 12px}
+.card .grp{margin-bottom:9px}
+.card .two p.ln{font-size:9px}
 </style>
 </head>
 <body>
@@ -135,36 +137,30 @@
       Dec −16° 42′ 58″
     </div>
 
-    <!-- location 과 상하좌우 반대 위치 (왼쪽 아래) -->
     <div class="lbl fg">망각은 축복이었을 텐데</div>
 
     <div id="stage">
       <svg viewBox="0 0 1596 2310" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
 
-        <!-- 선 -->
         <line class="line" x1="378" y1="711" x2="1201" y2="355"/>
         <line class="line" x1="357" y1="827" x2="1230" y2="1256"/>
         <line class="line" x1="1260" y1="1380" x2="856" y2="1922"/>
 
-        <!-- 별 1 (큼) -->
         <g class="star" data-card="0" data-cx="1330" data-cy="300" data-r="105" data-size="200" tabindex="0" role="button" aria-label="about No.1">
           <path class="shape" fill="#111"/>
           <circle cx="1330" cy="300" r="110" fill="transparent"/>
         </g>
 
-        <!-- 별 2 (중간) -->
         <g class="star" data-card="1" data-cx="240" data-cy="770" data-r="60" data-size="120" tabindex="0" role="button" aria-label="about No.2">
           <path class="shape" fill="#111"/>
           <circle cx="240" cy="770" r="90" fill="transparent"/>
         </g>
 
-        <!-- 별 3 (작음) -->
         <g class="star" data-card="2" data-cx="1320" data-cy="1300" data-r="38" data-size="80" tabindex="0" role="button" aria-label="about No.3">
           <path class="shape" fill="#111"/>
           <circle cx="1320" cy="1300" r="80" fill="transparent"/>
         </g>
 
-        <!-- 뚫린 원 -->
         <g class="star" data-card="3" data-cx="820" data-cy="1970" data-size="56" tabindex="0" role="button" aria-label="about No.4">
           <circle class="shape" cx="820" cy="1970" r="15" fill="none" stroke="#111" stroke-width="5"/>
           <circle cx="820" cy="1970" r="80" fill="transparent"/>
@@ -175,7 +171,6 @@
       <div class="lbl sat" style="left:8%;top:41.5%">NORAD 43013<br>COSPAR 2017-073A</div>
       <div class="lbl sat" style="right:0;top:63%;text-align:right">NORAD 28654<br>COSPAR 2005-018A</div>
       <div class="lbl sat" style="left:58%;top:84.5%">NORAD 41240<br>COSPAR 2016-040A</div>
-      <!-- top 값을 키우면 원에서 더 멀어지고, 줄이면 가까워집니다 -->
     </div>
   </div>
 </section>
@@ -187,40 +182,75 @@
 <span style="letter-spacing: -0.8px; margin-bottom: 0px; line-height: 1.35; margin-top: -9px;"><span style="letter-spacing: -1px; line-height: 1.35;"><span style="letter-spacing: -0.8px; line-height: 1.35;"><div class="meta" style="line-height: 1.35;"></div><span style="letter-spacing: -0.6px; line-height: 1.35;"><span style="letter-spacing: -0.8px; line-height: 1.35;"><span style="letter-spacing: -0.6px; line-height: 1.35;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"><div class="meta" style="line-height: 1.35;">( <i style="line-height: 1.35;">@unlessfarewell</i> )</div>
   <div class="id-row" style="line-height: 1.35; margin-bottom: 3px;"><span class="tag" style="line-height: 1.35;">Eternity</span> · 20⁺</div>
   <div class="id-row" style="line-height: 1.35;">ㄴ ♥  블랙배저 · <b style="line-height: 1.35;">이예현 </b><span class="g" style="line-height: 1.35;">기타 동장르 최윤</span></div>
-  <div class="label" style="line-height: 1.35;"><span style="line-height: 1.35;"><span style="letter-spacing: 0.8px; line-height: 1.35;"><span style="letter-spacing: 0.6px; line-height: 1.35;"><span style="letter-spacing: 0.4px; line-height: 1.35;"><span style="letter-spacing: 0.2px; line-height: 1.35;"><span style="letter-spacing: 0px; line-height: 1.35;"><span style="letter-spacing: -0.2px; line-height: 1.35;"><span style="letter-spacing: -0.4px; line-height: 1.35;"><span style="letter-spacing: -0.6px; line-height: 1.35;">ACCOUNTS</span></span></span></span></span></span></span></span></span></div>
-  <p class="ln" style="font-size: 9px; line-height: 1.35;">main acc (@ruinsez)</p><p class="ln" style="font-size: 9px; line-height: 1.35;"><span style="letter-spacing: -0.6px; line-height: 1.35;"><b style="line-height: 1.35;">제 개인정보와 관련된 어떠한 내용도 제3자가 볼 수 있는 곳에 게시하지 마세요⋯</b> 해당 성향글 또한 외부로 유출 X 정독하고 성향 어긋날 경우 FF 정리 반드시 하세요</span></p><p class="ln" style="line-height: 1.35;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"></span></span></span></span></span></span></span></span></p><details class="fold" style="font-size: 9px; line-height: 1.35;"><summary style="line-height: 1.35;">more...</summary><div style="line-height: 1.35;">(1) 비주기성 프로텍트 계정으로 불호 발언 및 일상 누수, 과격한 언행이 트윗의 주를 차지합니다 <b style="line-height: 1.35;">기존 외 미성년자와의 연결 지양</b></div><div style="line-height: 1.35;">(2) 모든 계정을 통틀어 접속률이 가장 높으므로 제가 봐야할 것이나 메인 드림 변경, 계정 이동 등의 사안은 해당 계정 다이렉트 메시지로 언급 바랍니다 최근 들어 일정이 난해한 탓에 알림에 혼돈이 크게 옵니다 따라 <b style="line-height: 1.35;">사적 용도로 사용 X 디엠 삭제합니다</b></div><div style="line-height: 1.35;">(3) 작성하는 모든 트윗은 별도의 필터를 경유하지 않습니다 편하게 쓰고자 생성한 계정일 뿐더러 세심한 성정이 아니라 필요에 따라 맞팔로우 뮤트 자유롭게 합니다 (나중에 풉니다⋯) 이에 악의 일절 없으며 관련해서 타임라인 저격 적당히 하세요⋯ </div></details></span></span></span></span></span></span></span></span>
+  <div class="label" style="line-height: 1.35;">ACCOUNTS</div>
+  <p class="ln" style="font-size: 9px; line-height: 1.35;">main acc (@ruinsez)</p><p class="ln" style="font-size: 9px; line-height: 1.35;"><span style="letter-spacing: -0.6px; line-height: 1.35;"><b style="line-height: 1.35;">제 개인정보와 관련된 어떠한 내용도 제3자가 볼 수 있는 곳에 게시하지 마세요⋯</b> 해당 성향글 또한 외부로 유출 X 정독하고 성향 어긋날 경우 FF 정리 반드시 하세요</span></p><details class="fold" style="font-size: 9px; line-height: 1.35;"><summary style="line-height: 1.35;">more...</summary><div style="line-height: 1.35;">(1) 비주기성 프로텍트 계정으로 불호 발언 및 일상 누수, 과격한 언행이 트윗의 주를 차지합니다 <b style="line-height: 1.35;">기존 외 미성년자와의 연결 지양</b></div><div style="line-height: 1.35;">(2) 모든 계정을 통틀어 접속률이 가장 높으므로 제가 봐야할 것이나 메인 드림 변경, 계정 이동 등의 사안은 해당 계정 다이렉트 메시지로 언급 바랍니다 최근 들어 일정이 난해한 탓에 알림에 혼돈이 크게 옵니다 따라 <b style="line-height: 1.35;">사적 용도로 사용 X 디엠 삭제합니다</b></div><div style="line-height: 1.35;">(3) 작성하는 모든 트윗은 별도의 필터를 경유하지 않습니다 편하게 쓰고자 생성한 계정일 뿐더러 세심한 성정이 아니라 필요에 따라 맞팔로우 뮤트 자유롭게 합니다 (나중에 풉니다⋯) 이에 악의 일절 없으며 관련해서 타임라인 저격 적당히 하세요⋯ </div></details></span></span></span></span></span></span></span></span>
 </article>
 
 <article class="card" id="card1">
-<span style="font-size: 9.5px; margin-top: 12px;"><span style="font-size: 10px;"><span style="font-size: 9.5px;"><span style="font-size: 9px;"><div class="meta"><span>( <i>caution</i> )</span></div>
-  <div class="id-row"><span class="tag">NG</span></div>
-  <div class="two"><div><div class="label"><span style="line-height: 1.35;"><span style="letter-spacing: 0.8px; line-height: 1.35;"><span style="letter-spacing: 0.6px; line-height: 1.35;"><span style="letter-spacing: 0.4px; line-height: 1.35;"><span style="letter-spacing: 0.2px; line-height: 1.35;"><span style="letter-spacing: 0px; line-height: 1.35;"><span style="letter-spacing: -0.2px; line-height: 1.35;"><span style="letter-spacing: -0.4px; line-height: 1.35;"><span style="letter-spacing: -0.6px; line-height: 1.35;"><span style="letter-spacing: -0.4px; line-height: 1.35;">Default</span></span></span></span></span></span></span></span></span></span></div><p class="ln" style="line-height: 1.35;">ㄴ 이예현 관련 모든 동인 커플링</p><p class="ln" style="line-height: 1.35;">ㄴ <b style="line-height: 1.35;">강차, 윤예, 뤀얀 </b>(위치 및 상대 무관)</p></div><div><div class="label"><span style="letter-spacing: 0.8px;"><span style="letter-spacing: 0.6px;"><span style="letter-spacing: 0.4px;"><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0px;"><span style="letter-spacing: -0.2px;"><span style="letter-spacing: -0.4px;"><span style="letter-spacing: -0.6px;">ETC.</span></span></span></span></span></span></span></span></div><p class="ln" style="line-height: 1.35;">ㄴ 사찰 및 영향 받는 모든 행위</p><p class="ln" style="line-height: 1.35;">ㄴ 친분 과시</p></div></div></span></span></span></span><hr><span style="font-size: 9.5px;"><span style="font-size: 10px;"><span style="font-size: 9.5px;"><span style="font-size: 9px;"><span style="font-size: 9.5px;"><span style="font-size: 7.5px;"><span style="font-size: 8px;"><span style="font-size: 8.5px;"><span style="font-size: 9px;"><span style="font-size: 9.5px;"><span style="font-size: 10px;"><span style="font-size: 10.5px;"><span style="font-size: 8.5px;"><span style="font-size: 9px;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"><span style="line-height: 1.35;"><p class="para" style="font-size: 9.5px; line-height: 1.35;"><span style="font-size: 9px; letter-spacing: -0.8px; line-height: 1.35;">(1) 블랙배저 온리 NL 성향으로 공식 제외 <b style="line-height: 1.35;">모든 종류의 2차 동인 소비 거부</b>하며 어떠한 방향으로든 유입하지 마세요 이를 방지하기 위해 연성에 태그는 자제해 주셨으면 합니다⋯ 특히나 이예현의 경우 다른 캐릭터와의 로맨스 요소 소량이라도 존재할 경우 해당 연성 및 뉘앙스 트윗 유입은 친분 무관 블락합니다</span></p><p class="para" style="font-size: 9.5px; line-height: 1.35;"><span style="font-size: 9px; letter-spacing: -0.8px; line-height: 1.35;">(2) 단순 호감 발언을 차치하고 작품 완독 여부와 관계없이 타인에게로부터 발화되는 <b style="line-height: 1.35;">애정 담긴</b> 이예현 이야기에 면역이 없습니다 예민하다 싶으면 알아서 연결 재고</span></p><p class="para" style="font-size: 9.5px; line-height: 1.35;"><span style="font-size: 9px; letter-spacing: -0.8px; line-height: 1.35;">(3) <b style="line-height: 1.35;">제게서 어떠한 영향도 받지 마시고 제 문체 및 성향글 내용 베껴서 본인 거인 것처럼 구사하지 마세요⋯</b> 판단 하에 친분 무관 FF 정리하며 인간관계에 쉽게 피로해지는 타입이라 </span><span style="letter-spacing: -0.8px; font-size: 9px; line-height: 1.35;">관련 컨택 일절 받지 않습니다 2차 지인 통해서 연락 하지도 마세요</span></p><p class="para" style="font-size: 9.5px; line-height: 1.35;"><span style="letter-spacing: -0.8px; font-size: 9px; line-height: 1.35;">(4) 캐릭터 해석에 있어 상당히 예민하며 </span><span style="letter-spacing: -0.8px; font-size: 9px; line-height: 1.35;">승현 → 윤 ← 예현 (화살표 방향 무관) 형태의 커플링 극도로 싫어합니다 애정하는 이가 '예민수' 따위의 동인적 + 른 캐해 + 단편적인 캐릭터 해석을 명사화한 별명으로 불리는 걸 보고 싶지 않습니다 <span class="g" style="line-height: 1.35;">이하 타 장르 아드리안 아스카니엔 또한 근친 커플링 유입 거부하며 형동사 별명 싫어합니다 하지 마세요</span></span></p><p class="para" style="font-size: 9.5px; line-height: 1.35;"><span style="font-size: 9px; letter-spacing: -0.8px; line-height: 1.35;">(5) 미리 고지하지 않은 부분에서의 잡음 싫어합니다 <span class="g" style="line-height: 1.35;"><b style="line-height: 1.35;">계정 연결 = 성향 이해</b>로 간주</span></span><span style="letter-spacing: -0.8px; font-size: 9px; line-height: 1.35;"><span class="g" style="line-height: 1.35;"><br></span></span></p></span></span></span></span></span></span></span></span></span></span></span></span></span><span style="font-size: 7.5px;"><span style="font-size: 8px;"><span style="font-size: 8.5px;"><span style="font-size: 9px;"><span style="font-size: 9.5px;"><span style="font-size: 10px;"><span style="font-size: 10.5px;"><span style="font-size: 8.5px;"><p class="para"><span style="font-size: 8px;"></span></p></span><p class="para"><span style="font-size: 8px;"></span></p></span></span></span></span></span></span></span><p class="para"><span style="font-size: 8px;"></span></p></span></span></span></span>
+<div class="meta"></div>
+<div class="meta">( <i>caution</i> )</div>
+<div class="id-row"><span class="tag">NG</span></div>
+<div class="two">
+  <div>
+    <div class="label">Default</div>
+    <p class="ln">ㄴ 이예현 관련 모든 동인 커플링</p>
+    <p class="ln">ㄴ <b>강차, 윤예, 뤀얀 </b>(위치 및 상대 무관)</p>
+  </div>
+  <div>
+    <div class="label">ETC.</div>
+    <p class="ln">ㄴ 사찰 및 영향 받는 모든 행위</p>
+    <p class="ln">ㄴ 친분 과시</p>
+  </div>
+</div>
+<hr>
+<p class="ln">(1) 블랙배저 온리 NL 성향으로 공식 제외 <b>모든 종류의 2차 동인 소비 거부</b>하며 어떠한 방향으로든 유입하지 마세요 이를 방지하기 위해 연성에 태그는 자제해 주셨으면 합니다⋯ 특히나 이예현의 경우 다른 캐릭터와의 로맨스 요소 소량이라도 존재할 경우 해당 연성 및 뉘앙스 트윗 유입은 친분 무관 블락합니다</p>
+<p class="ln">(2) 단순 호감 발언을 차치하고 작품 완독 여부와 관계없이 타인에게로부터 발화되는 <b>애정 담긴</b> 이예현 이야기에 면역이 없습니다 예민하다 싶으면 알아서 연결 재고</p>
+<p class="ln">(3) <b>제게서 어떠한 영향도 받지 마시고 제 문체 및 성향글 내용 베껴서 본인 거인 것처럼 구사하지 마세요⋯</b> 판단 하에 친분 무관 FF 정리하며 인간관계에 쉽게 피로해지는 타입이라 관련 컨택 일절 받지 않습니다 2차 지인 통해서 연락 하지도 마세요</p>
+<p class="ln">(4) 캐릭터 해석에 있어 상당히 예민하며 승현 → 윤 ← 예현 (화살표 방향 무관) 형태의 커플링 극도로 싫어합니다 애정하는 이가 '예민수' 따위의 동인적 + 른 캐해 + 단편적인 캐릭터 해석을 명사화한 별명으로 불리는 걸 보고 싶지 않습니다 <span class="g">이하 타 장르 아드리안 아스카니엔 또한 근친 커플링 유입 거부하며 형동사 별명 싫어합니다 하지 마세요</span></p>
+<p class="ln">(5) 미리 고지하지 않은 부분에서의 잡음 싫어합니다 <span class="g"><b>계정 연결 = 성향 이해</b>로 간주</span></p>
 </article>
 
 <article class="card" id="card2">
-<span style="letter-spacing: -0.8px;">( <i style="margin-top: 3px; line-height: 1.35;">fyi</i> )<div style="line-height: 1.35;"><p style="letter-spacing: normal; -webkit-text-size-adjust: auto; caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); line-height: 1.35;"></p></div><div style="line-height: 1.35;"><br></div><div style="line-height: 1.35;">(1) 유사 연애 성향에 가깝습니다 <b style="line-height: 1.35;">정실 및 남자친구</b> 발언 잦으며 겹드림러가 있다는 사실 조차 기억하고 싶지 않으니 제가 따로 언급한 것 아닌 이상 제보하지 마세요 또한 함께 해 주시는 분 계시며 해당 문화에 부정적이실 경우 팔로우 거절합니다</div><div style="line-height: 1.35;"><br></div><div style="line-height: 1.35;">(2) 스스로 성향 예민한 것 인지하고 있으며 주력 드림 변경에 따른 별도의 배려를 매번 요하지 않는 것도 해당 사유와 관련 있습니다 저도 변덕 심한 거 잘 아니까 불편하시면 팔로우 재고하세요 <b style="line-height: 1.35;">제가 통제할 수 없는 부분에서 </b>불편함을 느끼신다면 마찬가지로 같은 대처 부탁드립니다 괜히 트윗이나 성향글 기재 등으로 되도 않는 시녀딸 받으면서 사람 열 받게 굴지 마세요</div><div style="line-height: 1.35;"><br></div><div style="line-height: 1.35;">(3) 이미 연 끝난 지인 겹트친이라는 이유로 저와 관련되어 할 얘기가 있다며 디엠 전달할 게 있다 하면 그냥 거절하세요⋯ 전달하셔도 스루하며 이전 지인이 제 험담을 해도 <b style="line-height: 1.35;">허위 사실 유포 내지 고소 감 아니라면 퍼날해 주지도 마세요</b></div><div style="line-height: 1.35;"><b style="line-height: 1.35;"><br></b></div><div style="line-height: 1.35;">(4) 해당 계정에서 올라오는 개인정보 믿으시나 마시나 제 알 바 아니고요 남한테 보여주려는 자랑질도 아니니까 혼자 피해의식 가지고 학벌통 온다 이딴 얘기 제 면전에 대고 하지 마세요 그리고 대학 관련해서 억측 적당히 하세요 인증을 해도 안 믿으면서 뭘 자꾸 잣대를 들이미시나요</div><div style="line-height: 1.35;"><br></div><div style="line-height: 1.35;"><b style="line-height: 1.35;">(5) 친목질 목적으로 제 동장르 </b><span class="g" style="line-height: 1.35;">(e.g. 블랙배저, 변호됨, 마차살)</span><b style="line-height: 1.35;"> 되려고 발악하지 마세요⋯</b> 애정 하나 없이 친목질 전용 드림 만드시는 거 정말 싫어합니다 그리고 오래 보고 개인적으로 정말 좋아하는 분들에 한해 그림이나 글 선물 드리지 동장르 잡으신다고 무조건 드리는 거 아닙니다</div><div style="line-height: 1.35;"></div><div style="line-height: 1.35;"><hr></div><div style="line-height: 1.35;">한 쪽이 끝낸 인연 무슨 일이 있어도 재차 이을 생각 없고 인터넷 상인 만큼 친하게 지냈다 해도 <b style="line-height: 1.35;">제가 불편하면 언제든 친분 무관 팔로우 재고합니다</b> 관련으로 컨택 받지 않으며 괘념치 마시길 만약 반대로 제가 불편해지시면 동일히 대처해 주세요 <span class="g" style="line-height: 1.35;">인연 재고 후에는 제가 선물한 그림 내지 글 되도록이면 사용하지 마세요⋯</span></div></span><div style="line-height: 1.35;"><span class="g" style="line-height: 1.35;"></span><span class="g" style="line-height: 1.35;"></span></div>
+<div class="meta"></div>
+<div class="meta">( <i>fyi</i> )</div>
+<p class="ln">(1) 유사 연애 성향에 가깝습니다 <b>정실 및 남자친구</b> 발언 잦으며 겹드림러가 있다는 사실 조차 기억하고 싶지 않으니 제가 따로 언급한 것 아닌 이상 제보하지 마세요 또한 함께 해 주시는 분 계시며 해당 문화에 부정적이실 경우 팔로우 거절합니다</p>
+<p class="ln">(2) 스스로 성향 예민한 것 인지하고 있으며 주력 드림 변경에 따른 별도의 배려를 매번 요하지 않는 것도 해당 사유와 관련 있습니다 저도 변덕 심한 거 잘 아니까 불편하시면 팔로우 재고하세요 <b>제가 통제할 수 없는 부분에서 </b>불편함을 느끼신다면 마찬가지로 같은 대처 부탁드립니다 괜히 트윗이나 성향글 기재 등으로 되도 않는 시녀딸 받으면서 사람 열 받게 굴지 마세요</p>
+<p class="ln">(3) 이미 연 끝난 지인 겹트친이라는 이유로 저와 관련되어 할 얘기가 있다며 디엠 전달할 게 있다 하면 그냥 거절하세요⋯ 전달하셔도 스루하며 이전 지인이 제 험담을 해도 <b>허위 사실 유포 내지 고소 감 아니라면 퍼날해 주지도 마세요</b></p>
+<p class="ln">(4) 해당 계정에서 올라오는 개인정보 믿으시나 마시나 제 알 바 아니고요 남한테 보여주려는 자랑질도 아니니까 혼자 피해의식 가지고 학벌통 온다 이딴 얘기 제 면전에 대고 하지 마세요 그리고 대학 관련해서 억측 적당히 하세요 인증을 해도 안 믿으면서 뭘 자꾸 잣대를 들이미시나요</p>
+<p class="ln"><b>(5) 친목질 목적으로 제 동장르 </b><span class="g">(e.g. 블랙배저, 변호됨, 마차살)</span><b> 되려고 발악하지 마세요⋯</b> 애정 하나 없이 친목질 전용 드림 만드시는 거 정말 싫어합니다 그리고 오래 보고 개인적으로 정말 좋아하는 분들에 한해 그림이나 글 선물 드리지 동장르 잡으신다고 무조건 드리는 거 아닙니다</p>
+<hr>
+<p class="ln">한 쪽이 끝낸 인연 무슨 일이 있어도 재차 이을 생각 없고 인터넷 상인 만큼 친하게 지냈다 해도 <b>제가 불편하면 언제든 친분 무관 팔로우 재고합니다</b> 관련으로 컨택 받지 않으며 괘념치 마시길 만약 반대로 제가 불편해지시면 동일히 대처해 주세요 <span class="g">인연 재고 후에는 제가 선물한 그림 내지 글 되도록이면 사용하지 마세요⋯</span></p>
 </article>
 
 <article class="card" id="card3">
-( <i>another</i> ) 기타 언급 가능성 O <span style="font-size: 9.5px;"><span style="font-size: 10px;"><span style="font-size: 10.5px;"><span class="g" style="margin-top: 12px;">전부 배려 필요하지 않습니다⋯</span></span></span></span><span class="g" style="margin-top: 12px;"></span><div><br></div><div>너희들은 변호됐다 <b>차주한</b></div><div>마법명가 차남으로 살아남는 법 <b>아드리안 아스카니엔 엘리아스 호엔촐레른</b></div><div>어두운 바다의 등불이 되어 <b>신해량</b></div><div>전지적 독자 시점 <b>유중혁</b></div><div>세상만 구하고 은퇴하겠습니다 <b>우희재</b></div><div><span style="letter-spacing: -0.6px;"></span><span class="g"><span style="letter-spacing: -0.6px;">+) 데뷔 못 하면 죽는 병 걸림 </span><b style="letter-spacing: -0.6px;">류청우</b></span><b style="letter-spacing: -0.6px;"></b><b><br></b></div><div><span class="g"><b style="letter-spacing: -0.6px;"><br></b></span></div><div>24GEN (peyz + chovy)</div><div><span style="letter-spacing: -0.6px;">overwatch 2 / LoL / TFT⋯ </span><br></div><div><br></div><div>캔트비블루, 원위, <b>찬민</b>, 엑스디너리 히어로즈</div><div><br></div><div>(2026.10.22.) 기준, 상황에 따라 첨삭 자주 합니다</div>
+<div class="meta"></div>
+<div class="meta">( <i>another</i> )</div>
+<p class="ln">기타 언급 가능성 O <span class="g">전부 배려 필요하지 않습니다⋯</span></p>
+<div class="grp">
+  <p class="ln">너희들은 변호됐다 <b>차주한</b></p>
+  <p class="ln">마법명가 차남으로 살아남는 법 <b>아드리안 아스카니엔 엘리아스 호엔촐레른</b></p>
+  <p class="ln">어두운 바다의 등불이 되어 <b>신해량</b></p>
+  <p class="ln">전지적 독자 시점 <b>유중혁</b></p>
+  <p class="ln">세상만 구하고 은퇴하겠습니다 <b>우희재</b></p>
+  <p class="ln"><span class="g">+) 데뷔 못 하면 죽는 병 걸림 </span><b>류청우</b></p>
+</div>
+<div class="grp">
+  <p class="ln">24GEN (peyz + chovy)</p>
+  <p class="ln">overwatch 2 / LoL / TFT⋯</p>
+</div>
+<div class="grp">
+  <p class="ln">캔트비블루, 원위, <b>찬민</b>, 엑스디너리 히어로즈</p>
+</div>
+<p class="ln">(2026.10.22.) 기준, 상황에 따라 첨삭 자주 합니다</p>
 </article>
 </div>
 
 <script>
   /* =====================  여기만 수정하세요  ===================== */
-
-  // 1페이지 사진 링크 (이미지 주소를 따옴표 안에 붙여 넣기)
   const PHOTO_URL = "https://i.pinimg.com/736x/ce/e1/eb/cee1ebe7256963720c05ca698578f378.jpg";
-
-  // 사진 클릭 시 이동할 주소. 비워두면 같은 파일 안의 2페이지로 넘어갑니다.
   const PAGE2_URL = "";
-
-  // 별 이미지 링크. 비워두면 기본 별 모양이 보입니다. 순서: 큰 별, 중간 별, 작은 별, 원
   const STAR_URLS = ["","","",""];
-
-  // 별 이미지 크기 (숫자가 클수록 큼). 순서는 위와 같습니다.
   const STAR_SIZES = [200, 120, 80, 56];
-
   /* ============================================================== */
 
   const page1 = document.getElementById('page1');
@@ -228,7 +258,6 @@
   const overlay = document.getElementById('overlay');
   const cards = [...document.querySelectorAll('.card')];
 
-  // 사진
   const img = document.getElementById('photoImg');
   if (PHOTO_URL) img.src = PHOTO_URL;
 
@@ -239,7 +268,6 @@
     page2.classList.remove('hide');
   });
 
-  // 별 이미지 교체
   const NS = 'http://www.w3.org/2000/svg';
   document.querySelectorAll('.star').forEach((s, i) => {
     const url = STAR_URLS[i];
@@ -257,14 +285,12 @@
     s.insertBefore(im, s.firstChild);
   });
 
-
-  // 기본 별 모양: 가늘고 긴 4방향 + 짧은 대각선 4방향
   function starPath(cx, cy, R) {
-    const tips = [  // [각도(deg), 길이]
+    const tips = [
       [-90, R], [-45, R*0.30], [0, R*0.60], [45, R*0.30],
       [90, R], [135, R*0.30], [180, R*0.60], [225, R*0.30]
     ];
-    const w = R * 0.045; // 허리 두께
+    const w = R * 0.045;
     const pt = (a, r) => [cx + r*Math.cos(a*Math.PI/180), cy + r*Math.sin(a*Math.PI/180)];
     let d = '';
     tips.forEach((t, i) => {
@@ -283,8 +309,6 @@
     if (s.dataset.r) s.querySelector('.shape').setAttribute('d', starPath(+s.dataset.cx, +s.dataset.cy, +s.dataset.r));
   });
 
-
-  // "망각은 축복이었을 텐데": location 과 별자리 중심 기준 점대칭(상하좌우 반대) 위치에 자동 배치
   const frame = document.getElementById('frame');
   const stageEl = document.getElementById('stage');
   const locEl = document.getElementById('loc');
@@ -294,11 +318,10 @@
     const st = stageEl.getBoundingClientRect();
     const l = locEl.getBoundingClientRect();
     if (!f.width) return;
-    // 별자리 실제 중심 (viewBox 1596x2310 기준 별들이 차지하는 범위의 중앙)
     const cx = st.left + st.width * (861 / 1596);
     const cy = st.top + st.height * (1131 / 2310);
     const lx = l.left + l.width / 2, ly = l.top + l.height / 2;
-    const PULL = 1; // 1 = 완전 점대칭 (location 과 같은 거리·반대 방향)
+    const PULL = 1;
     const tx = cx + (cx - lx) * PULL, ty = cy + (cy - ly) * PULL;
     const w = fgEl.offsetWidth, h = fgEl.offsetHeight;
     fgEl.style.left = (tx - w / 2 - f.left) + 'px';
@@ -309,7 +332,6 @@
   window.addEventListener('load', placeFg);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeFg);
 
-  // 팝업
   function openCard(i) {
     cards.forEach((c, k) => c.classList.toggle('show', k === i));
     overlay.classList.add('on');
@@ -328,7 +350,6 @@
     });
   });
 
-  // 화면 어디를 터치해도 팝업 닫힘
   overlay.addEventListener('click', e => { if (e.target.closest('details')) return; closeCard(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCard(); });
 </script>
